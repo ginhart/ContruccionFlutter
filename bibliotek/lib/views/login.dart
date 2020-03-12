@@ -21,6 +21,15 @@ class _LoginState extends State<Login> {
             child: Center(
           child: Column(
             children: <Widget>[
+              Text(
+                'Bienvenido a la BiblioteK',
+                style: TextStyle(
+                    color: Colors.grey[800],
+                    fontWeight: FontWeight.w800,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'Open Sans',
+                    fontSize: 25),
+              ),
               Image.network(
                   "https://desparchado.co/media/organizers/Konrad_Lorenz.png"),
               BeautyTextfield(

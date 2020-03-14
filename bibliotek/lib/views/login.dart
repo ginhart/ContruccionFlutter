@@ -15,8 +15,11 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text('BiblioteK'),
+        ),
           body: Padding(
-        padding: EdgeInsets.all(16.0),
+            padding : const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
             child: Center(
           child: Column(
@@ -31,7 +34,8 @@ class _LoginState extends State<Login> {
                     fontSize: 25),
               ),
               Image.network(
-                  "https://desparchado.co/media/organizers/Konrad_Lorenz.png"),
+                  "https://desparchado.co/media/organizers/Konrad_Lorenz.png",
+              ),
               BeautyTextfield(
                 width: double.maxFinite,
                 height: 60,

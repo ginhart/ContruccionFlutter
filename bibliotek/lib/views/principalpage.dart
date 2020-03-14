@@ -17,6 +17,7 @@ class _PrincipalPageState extends State<PrincipalPage>
     return Container(
       child: Scaffold(
         body:  NiceButton(
+          padding: const EdgeInsets.all(16.0),
                 width: 255,
                 elevation: 8.0,
                 radius: 52.0,

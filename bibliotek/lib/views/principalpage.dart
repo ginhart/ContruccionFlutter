@@ -2,6 +2,9 @@ import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nice_button/NiceButton.dart';
+import 'package:bibliotek/views/historiallibrary.dart';
+
+
 
 class PrincipalPage extends StatefulWidget {
   PrincipalPage({Key key}) : super(key: key);
@@ -27,7 +30,7 @@ class _PrincipalPageState extends State<PrincipalPage>
                  
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SystemsLibrary()),
+                    MaterialPageRoute(builder: (context) => HistorialLibrary()),
                   );
                 },
               ),

@@ -1,39 +1,70 @@
+import 'package:bibliotek/main.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nice_button/NiceButton.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
+import './about.dart';
 
+void main() => runApp(new MyApp());
 
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: new PrincipalPage(),
+    );
+  }
+}
 
 class PrincipalPage extends StatefulWidget {
-  PrincipalPage({Key key}) : super(key: key);
-
   @override
   _PrincipalPageState createState() => _PrincipalPageState();
 }
 
-class _PrincipalPageState extends State<PrincipalPage>
-    with TickerProviderStateMixin {
+// class PrincipalPage extends StatefulWidget {
+//   PrincipalPage({Key key}) : super(key: key);
+
+//   @override
+//   _PrincipalPageState createState() => _PrincipalPageState();
+// }
+
+class _PrincipalPageState extends State<PrincipalPage> {
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body:  NiceButton(
-          padding: const EdgeInsets.all(16.0),
-                width: 255,
-                elevation: 8.0,
-                radius: 52.0,
-                text: "Entrar",
-                background: Colors.blue,
-                onPressed: () {
-                 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HistorialLibrary()),
-                  );
-                },
+  Widget build(BuildContext) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("BiblioteK"),
+      ),
+      drawer: new Drawer(
+        child: ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: new Text('Juan '),
+              accountEmail: new Text('juan@konradlorenz.edu.co'),
+              currentAccountPicture: new CircleAvatar(
+                backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
               ),
+            ),
+            new ListTile(
+             
+              title: new Text('Historial'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => new HistorialLibrary()));
+              },
+            ),
+            new ListTile(
+              title: new Text('About'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new AboutPage()));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -31,25 +31,63 @@ class _BookState extends State<Book> {
           padding: const EdgeInsets.all(16.0),
           child: Container(
             child: Column(children: <Widget>[
-              Column(children: <Widget>[
-              Row(
+              Column(
                 children: <Widget>[
-                  Image.network(
-                      'https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg',
-                      height: 300,
-                      width: 200),
-                  const Text.rich(TextSpan(text: '', children: <TextSpan>[
-                    TextSpan(text: 'Nombre \n', style: TextStyle()),
-                    TextSpan(text: 'Autor \n', style: TextStyle()),
-                    TextSpan(text: 'Editorial \n', style: TextStyle()),
-                    TextSpan(text: 'Páginas \n', style: TextStyle()),
-                  ])),
+                  Row(
+                    children: <Widget>[
+                      Image.network(
+                          'https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg',
+                          height: 300,
+                          width: 200),
+                      Expanded(
+                          child: const Text.rich(
+                              TextSpan(text: '', children: <TextSpan>[
+                        TextSpan(text: 'Nombre: \n', style: TextStyle()),
+                        TextSpan(text: 'Android Studio \n', style: TextStyle()),
+                        TextSpan(text: 'Autor: \n', style: TextStyle()),
+                        TextSpan(
+                            text: 'Jesus Tomas, Vicente Carbonell \n',
+                            style: TextStyle()),
+                        TextSpan(text: 'Editorial: \n', style: TextStyle()),
+                        TextSpan(text: 'Marcombo \n', style: TextStyle()),
+                        TextSpan(text: 'Páginas: \n', style: TextStyle()),
+                        TextSpan(text: '3000 \n', style: TextStyle()),
+                      ])))
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Row(children: <Widget>[
+                        const Text.rich(TextSpan(text: '', children: <TextSpan>[
+                          TextSpan(text: 'Disponibilidad: \n', style: TextStyle()),
+                          TextSpan(
+                              text: '0 \n', style: TextStyle()),
+                              TextSpan(text: 'Tiempo restante: \n', style: TextStyle()),
+                          TextSpan(
+                              text: '00:00 \n', style: TextStyle()),
+                        ])),
+                      ])
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          IconButton(icon: Icon(Icons.favorite)),
+                          Text('Agregar a Favoritos'),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          IconButton(icon: Icon(Icons.star)),
+                          Text('Agregar a PDeseados'),
+                        ],
+                      )
+                    ],
+                  )
                 ],
-              ),
-              Row(children: <Widget>[
-                Text('aasd')
-              ],)
-              ],)
+              )
             ]),
           ),
         ),
@@ -57,13 +95,3 @@ class _BookState extends State<Book> {
     );
   }
 }
-
-/*Comparison of the performances of land use regression modelling and dispersion modelling in estimating small-scale variations in long-term air pollution concentrations in a Dutch urban area
-
-
-
-CAR model (Calculation of Air pollution from Road traffic)
-modelo LUR land use regression 
-modelo de dispersion
-
-COPERT*/

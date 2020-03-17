@@ -1,3 +1,4 @@
+import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
@@ -69,78 +70,120 @@ class _PrincipalPageState extends State<PrincipalPage> {
         mainAxisSpacing: 10,
         crossAxisCount: 2,
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[100],
-            child: Column(children: <Widget>[
-              new Image.asset('assets/images/psicologia.png', height: 100),
-              new Text(
-                "Psicologia",
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              ),
-            ]),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[100],
-            child: Column(children: <Widget>[
-              new Image.asset('assets/images/negocios.png', height: 100),
-              new Text(
-                "Negocios",
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              ),
-            ]),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[100],
-            child: Column(children: <Widget>[
-              new Image.asset('assets/images/mercadeo.png', height: 100),
-              new Text(
-                "Mercadeo",
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              ),
-            ]),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[100],
-            child: Column(children: <Widget>[
-              new Image.asset('assets/images/matematicas.png', height: 100),
-              new Text(
-                "Matematicas",
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              ),
-            ]),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[100],
-            child: Column(children: <Widget>[
-              new Image.asset('assets/images/ing_sistemas.png', height: 100),
-              new Text(
-                "Sistemas",
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              ),
-            ]),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[100],
-            child: Column(children: <Widget>[
-              new Image.asset('assets/images/ing_industrial.jpg', height: 100),
-              new Text(
-                "Industrial",
-                style: TextStyle(fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              ),
-            ]),
-          ),
+          new GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+              },
+              child: new Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.lightBlueAccent[400],
+                child: Column(children: <Widget>[
+                  new Image.asset('assets/images/psicologia.png', height: 100),
+                  new Text(
+                    "Psicologia",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5,
+                  ),
+                ]),
+              )),
+          new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
+                );
+              },
+              child: new Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.lightBlueAccent[400],
+                child: Column(children: <Widget>[
+                  new Image.asset('assets/images/negocios.png', height: 100),
+                  new Text(
+                    "Negocios",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5,
+                  ),
+                ]),
+              )),
+          new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
+                );
+              },
+              child: new Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.lightBlueAccent[400],
+                child: Column(children: <Widget>[
+                  new Image.asset('assets/images/mercadeo.png', height: 100),
+                  new Text(
+                    "Mercadeo",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5,
+                  ),
+                ]),
+              )),
+          new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
+                );
+              },
+              child: new Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.lightBlueAccent[400],
+                child: Column(children: <Widget>[
+                  new Image.asset('assets/images/matematicas.png', height: 100),
+                  new Text(
+                    "Matematicas",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5,
+                  ),
+                ]),
+              )),
+          new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
+                );
+              },
+              child: new Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.lightBlueAccent[400],
+                child: Column(children: <Widget>[
+                  new Image.asset('assets/images/ing_sistemas.png',
+                      height: 100),
+                  new Text(
+                    "Sistemas",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5,
+                  ),
+                ]),
+              )),
+          new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
+                );
+              },
+              child: new Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.lightBlueAccent[400],
+                child: Column(children: <Widget>[
+                  new Image.asset('assets/images/ing_industrial.jpg',
+                      height: 100),
+                  new Text(
+                    "Industrial",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5,
+                  ),
+                ]),
+              )),
         ],
       ),
     );

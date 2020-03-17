@@ -1,8 +1,5 @@
-import 'package:bibliotek/main.dart';
-import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nice_button/NiceButton.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
 import './about.dart';
 
@@ -31,7 +28,7 @@ class PrincipalPage extends StatefulWidget {
 
 class _PrincipalPageState extends State<PrincipalPage> {
   @override
-  Widget build(BuildContext) {
+  Widget build(buildContext) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("BiblioteK"),
@@ -47,7 +44,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
             ),
             new ListTile(
-             
               title: new Text('Historial'),
               onTap: () {
                 Navigator.push(
@@ -65,6 +61,87 @@ class _PrincipalPageState extends State<PrincipalPage> {
             ),
           ],
         ),
+      ),
+      body: GridView.count(
+        primary: false,
+        padding: const EdgeInsets.all(20),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        crossAxisCount: 2,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.teal[100],
+            child: Column(children: <Widget>[
+              new Image.asset('assets/images/psicologia.png', height: 100),
+              new Text(
+                "Psicologia",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.5,
+              ),
+            ]),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.teal[100],
+            child: Column(children: <Widget>[
+              new Image.asset('assets/images/negocios.png', height: 100),
+              new Text(
+                "Negocios",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.5,
+              ),
+            ]),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.teal[100],
+            child: Column(children: <Widget>[
+              new Image.asset('assets/images/mercadeo.png', height: 100),
+              new Text(
+                "Mercadeo",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.5,
+              ),
+            ]),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.teal[100],
+            child: Column(children: <Widget>[
+              new Image.asset('assets/images/matematicas.png', height: 100),
+              new Text(
+                "Matematicas",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.5,
+              ),
+            ]),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.teal[100],
+            child: Column(children: <Widget>[
+              new Image.asset('assets/images/ing_sistemas.png', height: 100),
+              new Text(
+                "Sistemas",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.5,
+              ),
+            ]),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.teal[100],
+            child: Column(children: <Widget>[
+              new Image.asset('assets/images/ing_industrial.jpg', height: 100),
+              new Text(
+                "Industrial",
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.5,
+              ),
+            ]),
+          ),
+        ],
       ),
     );
   }

@@ -72,11 +72,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
         children: <Widget>[
           new GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new SystemsLibrary()));
               },
               child: new Container(
                 padding: const EdgeInsets.all(8),
@@ -92,7 +89,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               )),
           new GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SystemsLibrary()),
@@ -112,7 +108,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               )),
           new GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SystemsLibrary()),
@@ -132,7 +127,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               )),
           new GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SystemsLibrary()),
@@ -152,7 +146,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               )),
           new GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SystemsLibrary()),
@@ -173,7 +166,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               )),
           new GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SystemsLibrary()),

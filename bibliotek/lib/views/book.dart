@@ -81,7 +81,7 @@ class _BookState extends State<Book> {
                       Column(
                         children: <Widget>[
                           IconButton(icon: Icon(Icons.star)),
-                          Text('Agregar a PDeseados'),
+                          Text('Agregar a Deseados'),
                         ],
                       )
                     ],

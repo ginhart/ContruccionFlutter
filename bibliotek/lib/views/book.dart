@@ -19,9 +19,7 @@ class BookC {
       'Marcombo', 300, 'https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg',1,'00:00');*/
 }
 
-
 class _BookState extends State<Book> {
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,12 +59,12 @@ class _BookState extends State<Book> {
                     children: <Widget>[
                       Row(children: <Widget>[
                         const Text.rich(TextSpan(text: '', children: <TextSpan>[
+                          TextSpan(text: 'Disponibilidad: \n', style: TextStyle()),
                           TextSpan(
-                              text: 'Disponibilidad: \n', style: TextStyle()),
-                          TextSpan(text: '0 \n', style: TextStyle()),
+                              text: '0 \n', style: TextStyle()),
+                              TextSpan(text: 'Tiempo restante: \n', style: TextStyle()),
                           TextSpan(
-                              text: 'Tiempo restante: \n', style: TextStyle()),
-                          TextSpan(text: '00:00 \n', style: TextStyle()),
+                              text: '00:00 \n', style: TextStyle()),
                         ])),
                       ])
                     ],
@@ -76,10 +74,8 @@ class _BookState extends State<Book> {
                     children: <Widget>[
                       Column(
                         children: <Widget>[
-                          IconButton(icon: Icon(Icons.favorite, color: Colors.red)),
-
+                          IconButton(icon: Icon(Icons.favorite)),
                           Text('Agregar a Favoritos'),
-                  
                         ],
                       ),
                       Column(
@@ -99,4 +95,3 @@ class _BookState extends State<Book> {
     );
   }
 }
-

@@ -1,3 +1,4 @@
+import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,6 +59,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => new AboutPage()));
+              },
+            ),new ListTile(
+              title: new Text('Configuracion'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new SettingsPage()));
               },
             ),
           ],

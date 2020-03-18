@@ -77,25 +77,9 @@ class _BookState extends State<Book> {
                       Column(
                         children: <Widget>[
                           IconButton(icon: Icon(Icons.favorite, color: Colors.red)),
-                          Text('Agregar a Favoritos'),
-                          RaisedButton(
-                            onPressed: () {
-                              final snackBar = SnackBar(
-                                content: Text('Yay! A trgfngffg!'),
-                                action: SnackBarAction(
-                                  label: 'Undo',
-                                  onPressed: () {
-                                    // Some code to undo the change.
-                                  },
-                                ),
-                              );
 
-                              // Find the Scaffold in the widget tree and use
-                              // it to show a SnackBar.
-                             Scaffold.of(context).showSnackBar(snackBar);
-                            },
-                            child: Text('Show SnackBar'),
-                          ),
+                          Text('Agregar a Favoritos'),
+                  
                         ],
                       ),
                       Column(

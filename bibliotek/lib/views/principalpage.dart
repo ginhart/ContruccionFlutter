@@ -70,6 +70,202 @@ class _PrincipalPageState extends State<PrincipalPage> {
           ],
         ),
       ),
+      body: Container(
+        height: double.maxFinite,
+        width: double.maxFinite,
+        child: Row(
+          children: <Widget>[
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Column(
+                children: <Widget>[
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/images/psicologia.png'),
+                              Text("Psicologia",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.5,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+                      },
+                    )
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              new Image.asset('assets/images/mercadeo.png'),
+                              Text("Mercadeo",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.5,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+                      },
+                    )
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              new Image.asset('assets/images/ing_sistemas.png'),
+                              Text("Sistemas",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.5,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+                      },
+                    )
+                  )
+                ],
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Column(
+                children: <Widget>[
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              new Image.asset('assets/images/negocios.png'),
+                              Text("Negocios",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.5,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+                      },
+                    )
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              new Image.asset('assets/images/matematicas.png'),
+                              Text("Matematicas",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.5,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+                      },
+                    )
+                  ),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              new Image.asset('assets/images/ing_industrial.jpg'),
+                              Text("Industrial",                    
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.5,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
+                      },
+                    )
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      )
+    );
+    /*Scaffold(
+      appBar: new AppBar(
+        title: new Text("BiblioteK"),
+      ),
+      drawer: new Drawer(
+        child: ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: new Text('Juan '),
+              accountEmail: new Text('juan@konradlorenz.edu.co'),
+              currentAccountPicture: new CircleAvatar(
+                backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
+              ),
+            ),
+            new ListTile(
+              title: new Text('Historial'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => new HistorialLibrary()));
+              },
+            ),
+            new ListTile(
+              title: new Text('About'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new AboutPage()));
+              },
+            ),new ListTile(
+              title: new Text('Configuracion'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new SettingsPage()));
+              },
+            ),
+          ],
+        ),
+      ),
       body: GridView.count(
         primary: false,
         padding: const EdgeInsets.all(20),
@@ -193,6 +389,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               )),
         ],
       ),
-    );
+    );*/
   }
 }

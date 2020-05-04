@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
 import './about.dart';
-
+import 'deseados.dart';
+import 'psychologylibrary.dart';
+import 'businesslibrary.dart';
+import 'marketinglibrary.dart';
+import 'mathlibrary.dart';
+import 'industriallibrary.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -103,7 +108,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => new HistorialLibrary()));
+                              builder: (context) => new Deseados()));
                     },
                   ),
                   new ListTile(
@@ -119,12 +124,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
             ),
             body: TabBarView(children: [
+              PsychologyLibrary(),
+              BusinessLibrary(),
+              MarketingLibrary(),
+              MathLibrary(),
+             
               SystemsLibrary(),
-              Text('Lista 2'),
-              Text('Lista 3'),
-              Text('Lista 4'),
-              Text('Lista 5'),
-              Text('Lista 6'),
+              IndustrialLibrary(),
             ]),
           )),
     );

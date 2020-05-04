@@ -63,7 +63,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
             ),
             new ListTile(
-              title: new Text('Libros Favoritos.'),
+              title: Row(children: [Icon(Icons.star), Text('Libros Favoritos.')],),
               onTap: () {
                 Navigator.push(
                     context,
@@ -73,7 +73,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
             ),
             
             new ListTile(
-              title: new Text('Libros Deseados.'),
+              title: Row(children: [Icon(Icons.favorite), Text('Libros Deseados.')],),
               onTap: () {
                 Navigator.push(
                     context,
@@ -83,7 +83,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
             ),
 
             new ListTile(
-              title: new Text('Historial'),
+              title: Row(children: [Icon(Icons.schedule), Text('Historial')],),
+
               onTap: () {
                 Navigator.push(
                     context,
@@ -92,13 +93,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
               },
             ),
             new ListTile(
-              title: new Text('About'),
+              title: Row(children: [Icon(Icons.not_listed_location), Text('About.')],),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => new AboutPage()));
               },
             ),new ListTile(
-              title: new Text('Configuracion'),
+              title: Row(children: [Icon(Icons.settings), Text('Configuración')],),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => new SettingsPage()));

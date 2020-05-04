@@ -1,4 +1,129 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
+
+class Book extends StatefulWidget {
+  Book({Key key}) : super(key: key);
+
+  @override
+  _BookState createState() => _BookState();
+}
+
+class _BookState extends State<Book> {
+  Book book = new Book();
+
+  Widget bookDescriptionTemplate(book) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Image.network(
+                    'https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg',
+                    //height: 300,
+                  ),
+                ),
+              ),
+              Expanded(
+                  child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Nombre:'),
+                    subtitle: Text('descrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpcion'),
+                  ),
+                  ListTile(
+                    title: Text('Autor:'),
+                    subtitle: Text('decrpcion'),
+                  ),
+                  ListTile(
+                    title: Text('Editorial:'),
+                    subtitle: Text('descrpcion'),
+                  ),
+                  ListTile(
+                    title: Text('Páginas:'),
+                    subtitle: Text('descrpcion'),
+                  ),
+                ],
+              )),
+            ],
+          ),
+          bookDisponibilityTemplate(book),
+          bookButtons(book),
+        ],
+      ),
+    );
+  }
+
+  Widget bookDisponibilityTemplate(book) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+            child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text('Disponibilidad:'),
+              subtitle: Text('descrpcion'),
+            ),
+            ListTile(
+              title: Text('Tiempo Restante:'),
+              subtitle: Text('decrpcion'),
+            ),
+          ],
+        )),
+      ],
+    );
+  }
+
+  Widget bookButtons(book) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+            child: ButtonBar(
+          children: <Widget>[
+            RaisedButton(
+              onPressed: null,
+              child: Row(
+                children: [Text('Agregar a Favoritos'), Icon(Icons.star)],
+              ),
+            ),
+            RaisedButton(
+              onPressed: null,
+              child: Row(
+                children: [Text('Agregar a Deseados'), Icon(Icons.favorite)],
+              ),
+            )
+          ],
+        ))
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text('Bibliotek'),
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.all(20),
+              child: Column(
+                children: <Widget>[
+                  bookDescriptionTemplate(book),
+                  //bookDisponibilityTemplate(book),
+                ],
+              ),
+            ),
+          )),
+    );
+  }
+}
+/*import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -10,15 +135,6 @@ class Book extends StatefulWidget {
   _BookState createState() => _BookState();
 }
 
-class BookC {
-  String title, writer, editorial, image, time;
-  int pages, disponibilidad;
-
-  BookC(this.title, this.writer, this.editorial, this.pages, this.image,
-      this.disponibilidad, this.time);
-  /*  BookC book('Android Studio', 'Jesus Tomas, Vicente Carbonell',
-      'Marcombo', 300, 'https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg',1,'00:00');*/
-}
 
 class _BookState extends State<Book> {
   @override
@@ -96,3 +212,4 @@ class _BookState extends State<Book> {
     );
   }
 }
+*/

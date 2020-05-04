@@ -1,3 +1,4 @@
+import 'package:bibliotek/views/favoritos.dart';
 import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,15 @@ class _PrincipalPageState extends State<PrincipalPage> {
               currentAccountPicture: new CircleAvatar(
                 backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
               ),
+            ),
+            new ListTile(
+              title: new Text('Libros Favoritos.'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => new Favoritos()));
+              },
             ),
             new ListTile(
               title: new Text('Historial'),

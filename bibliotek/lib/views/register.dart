@@ -3,9 +3,11 @@ import 'package:bibliotek/Services/AutService.dart';
 import 'package:bibliotek/functions/BeautyTextfield.dart';
 import 'package:bibliotek/views/login.dart';
 import 'package:bibliotek/views/principalpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
+import '../functions/Global.dart' as Global;
 
 class Register extends StatefulWidget {
   Register({Key key}) : super(key: key);
@@ -18,6 +20,8 @@ class _RegisterState extends State<Register> {
   User usuario = new User();
   String password;
   Autentication autenticar = new Autentication();
+
+  final Firestore _db = Firestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -150,13 +154,23 @@ class _RegisterState extends State<Register> {
                       try {
                         AuthResult result =
                             await autenticar.registers(usuario, password);
-
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PrincipalPage()),
-                        );
+                        _db
+                            .collection('Usuarios')
+                            .document(result.user.uid)
+                            .setData({
+                          'Correo': usuario.correo,
+                          'Nombre': usuario.nombre,
+                          'Apellido': usuario.apellido,
+                          'Facultad': usuario.facultad
+                        }).then((value) =>  {
+                                  Global.user = usuario,
+                                  Navigator.of(context).pop(),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PrincipalPage()),
+                                  )
+                                });
                       } catch (error) {
                         String _error;
                         print('Falle al registrar ${error.code}');
@@ -179,23 +193,21 @@ class _RegisterState extends State<Register> {
                     },
                   ),
                   Container(
-                    margin: EdgeInsets.all(10),
-                    child: NiceButton(
-                    width: 255,
-                    elevation: 8.0,
-                    radius: 52.0,
-                    text: "Cancelar",
-                    background: Colors.blue,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      );
-                    },
-                  )
-                  ),
-                  
+                      margin: EdgeInsets.all(10),
+                      child: NiceButton(
+                        width: 255,
+                        elevation: 8.0,
+                        radius: 52.0,
+                        text: "Cancelar",
+                        background: Colors.blue,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Login()),
+                          );
+                        },
+                      )),
                 ],
               ),
             )),

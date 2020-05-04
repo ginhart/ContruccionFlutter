@@ -14,6 +14,9 @@ import 'businesslibrary.dart';
 import 'marketinglibrary.dart';
 import 'mathlibrary.dart';
 import 'industriallibrary.dart';
+
+import '../functions/Global.dart' as Global;
+
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -73,8 +76,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
               child: ListView(
                 children: <Widget>[
                   new UserAccountsDrawerHeader(
-                    accountName: new Text('Juan '),
-                    accountEmail: new Text('juan@konradlorenz.edu.co'),
+                    accountName: new Text(Global.user.nombre + ' ' + Global.user.apellido),
+                    accountEmail: new Text(Global.user.correo),
                     currentAccountPicture: new CircleAvatar(
                       backgroundImage:
                           new NetworkImage('http://i.pravatar.cc/300'),

@@ -1,22 +1,23 @@
+import 'package:bibliotek/Models/User.dart';
 import 'package:bibliotek/Services/AutService.dart';
 import 'package:bibliotek/functions/BeautyTextfield.dart';
+import 'package:bibliotek/views/login.dart';
 import 'package:bibliotek/views/principalpage.dart';
-import 'package:bibliotek/views/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
 
-class Login extends StatefulWidget {
-  Login({Key key}) : super(key: key);
+class Register extends StatefulWidget {
+  Register({Key key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  String correo;
+class _RegisterState extends State<Register> {
+  User usuario = new User();
   String password;
-  Autentication logeo = new Autentication();
+  Autentication autenticar = new Autentication();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _LoginState extends State<Login> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    'Bienvenido a la BiblioteK',
+                    'Crea una Cuenta',
                     style: TextStyle(
                         color: Colors.grey[800],
                         fontWeight: FontWeight.w800,
@@ -40,27 +41,64 @@ class _LoginState extends State<Login> {
                         fontFamily: 'Open Sans',
                         fontSize: 25),
                   ),
-                  Image.network(
-                    "https://desparchado.co/media/organizers/Konrad_Lorenz.png",
-                  ),
                   BeautyTextfield(
                     width: double.maxFinite,
                     height: 60,
                     duration: Duration(milliseconds: 300),
                     inputType: TextInputType.text,
                     prefixIcon: Icon(Icons.email),
+                    placeholder: "Nombre",
+                    backgroundColor: Colors.white54,
+                    onTap: () {
+                      print('Click');
+                    },
+                    onChanged: (text) {
+                      usuario.nombre = text;
+                    },
+                    onSubmitted: (data) {
+                      print(data.length);
+                    },
+                    obscureText: false,
+                  ),
+                  BeautyTextfield(
+                    width: double.maxFinite,
+                    height: 60,
+                    maxLines: 1,
+                    duration: Duration(milliseconds: 300),
+                    inputType: TextInputType.text,
+                    obscureText: false,
+                    prefixIcon: Icon(Icons.lock_outline),
+                    placeholder: "Apellido",
+                    backgroundColor: Colors.white54,
+                    onTap: () {
+                      print('Click');
+                    },
+                    onChanged: (text) {
+                      usuario.apellido = text;
+                    },
+                    onSubmitted: (data) {
+                      print(data.length);
+                    },
+                  ),
+                  BeautyTextfield(
+                    width: double.maxFinite,
+                    height: 60,
+                    maxLines: 1,
+                    duration: Duration(milliseconds: 300),
+                    inputType: TextInputType.text,
+                    obscureText: false,
+                    prefixIcon: Icon(Icons.lock_outline),
                     placeholder: "Correo",
                     backgroundColor: Colors.white54,
                     onTap: () {
                       print('Click');
                     },
                     onChanged: (text) {
-                      correo = text;
+                      usuario.correo = text;
                     },
                     onSubmitted: (data) {
                       print(data.length);
                     },
-                    obscureText: false,
                   ),
                   BeautyTextfield(
                     width: double.maxFinite,
@@ -82,15 +120,36 @@ class _LoginState extends State<Login> {
                       print(data.length);
                     },
                   ),
+                  BeautyTextfield(
+                    width: double.maxFinite,
+                    height: 60,
+                    maxLines: 1,
+                    duration: Duration(milliseconds: 300),
+                    inputType: TextInputType.text,
+                    obscureText: false,
+                    prefixIcon: Icon(Icons.lock_outline),
+                    placeholder: "Facultad",
+                    backgroundColor: Colors.white54,
+                    onTap: () {
+                      print('Click');
+                    },
+                    onChanged: (text) {
+                      usuario.facultad = text;
+                    },
+                    onSubmitted: (data) {
+                      print(data.length);
+                    },
+                  ),
                   NiceButton(
                     width: 255,
                     elevation: 8.0,
                     radius: 52.0,
-                    text: "Entrar",
+                    text: "Registrarse",
                     background: Colors.blue,
                     onPressed: () async {
                       try {
-                        AuthResult result = await logeo.login(correo, password);
+                        AuthResult result =
+                            await autenticar.registers(usuario, password);
 
                         Navigator.of(context).pop();
                         Navigator.push(
@@ -123,13 +182,13 @@ class _LoginState extends State<Login> {
                     width: 255,
                     elevation: 8.0,
                     radius: 52.0,
-                    text: "Registrarse",
+                    text: "Cancelar",
                     background: Colors.blue,
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Register()),
+                        MaterialPageRoute(builder: (context) => Login()),
                       );
                     },
                   ),

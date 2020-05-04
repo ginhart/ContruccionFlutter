@@ -23,6 +23,9 @@ dependencies:
   rflutter_alert: ^1.0.2
   flutter_staggered_animations: "^0.1.2"
   fluid_layout: ^0.1.0
+  firebase_core: # Firebase Core
+  firebase_auth: # Firebase Authentication API
+  firebase_storage: ^3.1.3 # Firebase Storage
  
 
   # The following adds the Cupertino Icons font to your application.

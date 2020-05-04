@@ -1,5 +1,8 @@
 import 'package:bibliotek/functions/BeautyTextfield.dart';
+import 'package:bibliotek/views/book.dart';
 import 'package:bibliotek/views/historial.dart';
+import 'package:bibliotek/views/historyMultipantalla.dart';
+import 'package:bibliotek/views/masterDetailContainer2.dart';
 import 'package:flutter/material.dart';
 
 import 'historial.dart';
@@ -20,8 +23,9 @@ class _HistorialLibraryState extends State<HistorialLibrary> {
     return Container(
         child: Scaffold(
       appBar: AppBar(
-      
+       title: Text("Historial"),
         actions: <Widget>[
+          
           // action button
           IconButton(
             icon: Icon(Icons.search),
@@ -49,55 +53,57 @@ class _HistorialLibraryState extends State<HistorialLibrary> {
               );
               });
             },
+            
           ),
           // action button
 
           // overflow menu
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Center(
-              child: Column(
-            children: <Widget>[
-              _inputsearch,
-              Text(
-                'Historial.',
-                style: TextStyle(
-                    color: Colors.grey[800],
-                    fontWeight: FontWeight.w800,
-                    fontStyle: FontStyle.normal,
-                    fontFamily: 'Open Sans',
-                    fontSize: 25),
-              ),
+      body: MasterDetailContainer2()
+      // Padding(
+      //   padding: EdgeInsets.all(16.0),
+      //   child: SingleChildScrollView(
+      //     child: Center(
+      //         child: Column(
+      //       children: <Widget>[
+      //         _inputsearch,
+      //         Text(
+      //           'Historial.',
+      //           style: TextStyle(
+      //               color: Colors.grey[800],
+      //               fontWeight: FontWeight.w800,
+      //               fontStyle: FontStyle.normal,
+      //               fontFamily: 'Open Sans',
+      //               fontSize: 25),
+      //         ),
               
-              GestureDetector(
-                child: Card(
-                  child: Row(
-                    children: <Widget>[
-                      Image.network(
-                        "https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg",
-                        height: 150,
-                      ),
-                      Text(
-                        'El Gran Libro de Android.',
-                        style: TextStyle(fontSize: 18),
-                      )
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Historial()),
-                  );
-                },
-              )
-            ],
-          )),
-        ),
-      ),
+      //         GestureDetector(
+      //           child: Card(
+      //             child: Row(
+      //               children: <Widget>[
+      //                 Image.network(
+      //                   "https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg",
+      //                   height: 150,
+      //                 ),
+      //                 Text(
+      //                   'El Gran Libro de Android.',
+      //                   style: TextStyle(fontSize: 18),
+      //                 )
+      //               ],
+      //             ),
+      //           ),
+      //           onTap: () {
+      //             Navigator.push(
+      //               context,
+      //               MaterialPageRoute(builder: (context) => Book()),
+      //             );
+      //           },
+      //         )
+      //       ],
+      //     )),
+      //   ),
+      // ),
     ));
   }
 }

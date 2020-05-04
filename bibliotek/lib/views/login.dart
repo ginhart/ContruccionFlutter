@@ -107,6 +107,7 @@ class _LoginState extends State<Login> {
                             .then((DocumentSnapshot value) {
                               print(value.data);
                               Global.user = new User();
+                              Global.user.id = value.documentID;
                           Global.user.correo = value.data['Correo'];
                           Global.user.nombre = value.data['Nombre'];
                           Global.user.apellido = value.data['Apellido'];

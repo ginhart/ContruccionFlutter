@@ -1,5 +1,5 @@
 import 'package:bibliotek/views/deseados.dart';
-import 'package:bibliotek/views/favorite.dart';
+
 import 'package:bibliotek/views/favoritos.dart';
 import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
@@ -104,7 +104,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => new Favorite()));
+                              builder: (context) => new Favoritos()));
                     },
                   ),
                   new ListTile(

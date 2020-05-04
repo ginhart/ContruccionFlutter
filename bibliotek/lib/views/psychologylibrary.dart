@@ -1,3 +1,4 @@
+import 'package:bibliotek/Models/Book.dart';
 import 'package:bibliotek/Services/Consulta.dart';
 import 'package:bibliotek/functions/BeautyTextfield.dart';
 import 'package:bibliotek/views/book.dart';
@@ -12,7 +13,7 @@ class PsychologyLibrary extends StatefulWidget {
 }
 
 class _PsychologyLibraryState extends State<PsychologyLibrary> {
-Widget _inputsearch = new Container();
+  Widget _inputsearch = new Container();
   Consulta _consulta = new Consulta();
   @override
   Widget build(BuildContext context) {
@@ -71,10 +72,12 @@ Widget _inputsearch = new Container();
               StreamBuilder(
                   stream: this._consulta.buscarLibrosFiltrados('Psicología'),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-
-                return snapshot.hasData? 
-                Column(children: buildBooks(snapshot.data.documents),) :CircularProgressIndicator();
-              })
+                    return snapshot.hasData
+                        ? Column(
+                            children: buildBooks(snapshot.data.documents),
+                          )
+                        : CircularProgressIndicator();
+                  })
             ],
           )),
         ),
@@ -82,30 +85,42 @@ Widget _inputsearch = new Container();
     ));
   }
 
-  List<Widget> buildBooks(List<DocumentSnapshot> documentos){
-        List<Widget> books = documentos.map((DocumentSnapshot snapshot) {return GestureDetector(
-                  child: Card(
-                    child: Row(
-                      children: <Widget>[
-                        Image.network(
-                          snapshot.data['Imagen'],
-                          height: 150,
-                        ),
-                        Text(
-                          snapshot.data['Nombre'],
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Book()),
-                    );
-                  },
-                ); }).toList();
-                return books;
-       
+  List<Widget> buildBooks(List<DocumentSnapshot> documentos) {
+    List<Widget> books = documentos.map((DocumentSnapshot snapshot) {
+      BookModel libro = new BookModel(
+          id: snapshot.documentID,
+          imagen: snapshot.data['Imagen'],
+          disponibilidad: snapshot.data['Disponibilidad'],
+          paginas: snapshot.data['Páginas'],
+          editorial: snapshot.data['Editorial'],
+          autor: snapshot.data['Autor'],
+          nombre: snapshot.data['Nombre'],
+          facultad: snapshot.data['Facultad']);
+
+      print(libro);
+      return GestureDetector(
+        child: Card(
+          child: Row(
+            children: <Widget>[
+              Image.network(
+                snapshot.data['Imagen'],
+                height: 150,
+              ),
+              Text(
+                snapshot.data['Nombre'],
+                style: TextStyle(fontSize: 18),
+              )
+            ],
+          ),
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Book(libro: libro,)),
+          );
+        },
+      );
+    }).toList();
+    return books;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:bibliotek/views/deseados.dart';
 import 'package:bibliotek/views/favorite.dart';
 import 'package:bibliotek/views/favoritos.dart';
-import 'package:bibliotek/views/psicologylibrary.dart';
 import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';

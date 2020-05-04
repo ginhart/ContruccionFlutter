@@ -119,7 +119,9 @@ class _LoginState extends State<Login> {
                       }
                     },
                   ),
-                  NiceButton(
+                  Container( 
+                    margin: EdgeInsets.all(10),
+                    child:NiceButton(
                     width: 255,
                     elevation: 8.0,
                     radius: 52.0,
@@ -132,7 +134,8 @@ class _LoginState extends State<Login> {
                         MaterialPageRoute(builder: (context) => Register()),
                       );
                     },
-                  ),
+                  ),)
+                 
                 ],
               ),
             )),

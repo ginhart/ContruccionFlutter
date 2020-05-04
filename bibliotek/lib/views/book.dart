@@ -1,7 +1,9 @@
+import 'package:bibliotek/Models/Book.dart';
 import 'package:flutter/material.dart';
 
 class Book extends StatefulWidget {
-  Book({Key key}) : super(key: key);
+   BookModel libro = new BookModel();
+  Book({Key key, this.libro}) : super(key: key);
 
   @override
   _BookState createState() => _BookState();
@@ -21,7 +23,8 @@ class _BookState extends State<Book> {
                 child: Container(
                   margin: EdgeInsets.only(left: 10),
                   child: Image.network(
-                    'https://images-na.ssl-images-amazon.com/images/I/7139EcoIUpL.jpg',
+
+                    widget.libro.imagen,
                     //height: 300,
                   ),
                 ),
@@ -31,19 +34,19 @@ class _BookState extends State<Book> {
                 children: <Widget>[
                   ListTile(
                     title: Text('Nombre:'),
-                    subtitle: Text('descrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpciondescrpcion'),
+                    subtitle: Text(widget.libro.nombre),
                   ),
                   ListTile(
                     title: Text('Autor:'),
-                    subtitle: Text('decrpcion'),
+                    subtitle: Text(widget.libro.autor),
                   ),
                   ListTile(
                     title: Text('Editorial:'),
-                    subtitle: Text('descrpcion'),
+                    subtitle: Text(widget.libro.editorial),
                   ),
                   ListTile(
                     title: Text('Páginas:'),
-                    subtitle: Text('descrpcion'),
+                    subtitle: Text(widget.libro.paginas),
                   ),
                 ],
               )),
@@ -65,7 +68,7 @@ class _BookState extends State<Book> {
           children: <Widget>[
             ListTile(
               title: Text('Disponibilidad:'),
-              subtitle: Text('descrpcion'),
+              subtitle: Text(widget.libro.disponibilidad.toString()),
             ),
             ListTile(
               title: Text('Tiempo Restante:'),

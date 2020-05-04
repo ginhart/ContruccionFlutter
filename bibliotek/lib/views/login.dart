@@ -1,10 +1,13 @@
+import 'package:bibliotek/Models/User.dart';
 import 'package:bibliotek/Services/AutService.dart';
 import 'package:bibliotek/functions/BeautyTextfield.dart';
 import 'package:bibliotek/views/principalpage.dart';
 import 'package:bibliotek/views/register.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
+import '../functions/Global.dart' as Global;
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -17,6 +20,8 @@ class _LoginState extends State<Login> {
   String correo;
   String password;
   Autentication logeo = new Autentication();
+
+  final Firestore _db = Firestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +100,25 @@ class _LoginState extends State<Login> {
                     onPressed: () async {
                       try {
                         AuthResult result = await logeo.login(correo, password);
+                        _db
+                            .collection('Usuarios')
+                            .document(result.user.uid)
+                            .get()
+                            .then((DocumentSnapshot value) {
+                              print(value.data);
+                              Global.user = new User();
+                          Global.user.correo = value.data['Correo'];
+                          Global.user.nombre = value.data['Nombre'];
+                          Global.user.apellido = value.data['Apellido'];
+                          Global.user.facultad = value.data['Facultad'];
 
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PrincipalPage()),
-                        );
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PrincipalPage()),
+                          );
+                        });
                       } catch (error) {
                         String _error;
                         print('Falle al registrar ${error.code}');

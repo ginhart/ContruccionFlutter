@@ -1,10 +1,20 @@
+import 'package:bibliotek/views/deseados.dart';
 import 'package:bibliotek/views/favorite.dart';
+import 'package:bibliotek/views/favoritos.dart';
 import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
 import './about.dart';
+import 'deseados.dart';
+import 'psychologylibrary.dart';
+import 'businesslibrary.dart';
+import 'marketinglibrary.dart';
+import 'mathlibrary.dart';
+import 'industriallibrary.dart';
+
+import '../functions/Global.dart' as Global;
 
 void main() => runApp(new MyApp());
 
@@ -65,15 +75,15 @@ class _PrincipalPageState extends State<PrincipalPage> {
               child: ListView(
                 children: <Widget>[
                   new UserAccountsDrawerHeader(
-                    accountName: new Text('Juan '),
-                    accountEmail: new Text('juan@konradlorenz.edu.co'),
+                    accountName: new Text(Global.user.nombre + ' ' + Global.user.apellido),
+                    accountEmail: new Text(Global.user.correo),
                     currentAccountPicture: new CircleAvatar(
                       backgroundImage:
                           new NetworkImage('http://i.pravatar.cc/300'),
                     ),
                   ),
                   new ListTile(
-                    title: new Text('Historial'),
+                    title: Row(children: [Icon(Icons.schedule), Text('Libros Deseados.')],),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -89,7 +99,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
               },
             ),*/
                   new ListTile(
-                    title: new Text('Libros Favoritos'),
+                    title: Row(children: [Icon(Icons.star), Text('Libros Favoritos.')],),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -98,16 +108,16 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     },
                   ),
                   new ListTile(
-                    title: new Text('Libros Deseados'),
+                   title: Row(children: [Icon(Icons.favorite), Text('Libros Deseados.')],),
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => new HistorialLibrary()));
+                              builder: (context) => new Deseados()));
                     },
                   ),
                   new ListTile(
-                    title: new Text('Configuracion'),
+                    title: Row(children: [Icon(Icons.settings), Text('Configuración.')],),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -119,12 +129,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
             ),
             body: TabBarView(children: [
+              PsychologyLibrary(),
+              BusinessLibrary(),
+              MarketingLibrary(),
+              MathLibrary(),
+             
               SystemsLibrary(),
-              Text('Lista 2'),
-              Text('Lista 3'),
-              Text('Lista 4'),
-              Text('Lista 5'),
-              Text('Lista 6'),
+              IndustrialLibrary(),
             ]),
           )),
     );

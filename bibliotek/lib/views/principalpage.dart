@@ -31,11 +31,26 @@ class PrincipalPage extends StatefulWidget {
 class _PrincipalPageState extends State<PrincipalPage> {
   @override
   Widget build(buildContext) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("BiblioteK"),
-      ),
-      drawer: new Drawer(
+    return MaterialApp(
+      home: DefaultTabController(length: 6, child: Scaffold(
+        appBar: AppBar(
+          bottom: PreferredSize(
+            child: TabBar(
+              isScrollable: true,
+              unselectedLabelColor: Colors.white.withOpacity(0.3),
+              tabs: [
+            Tab(text: 'Psicologia',),
+            Tab(text: 'Negocios',),
+            Tab(text: 'Mercadeo'),
+            Tab(text: 'Matematicas',),
+            Tab(text: 'Sistemas',),
+            Tab(text: 'Industrial'),
+          ]),
+          preferredSize: Size.fromHeight(30.0),
+          ),
+          title: Text('BiblioteK'),
+        ),
+        drawer: new Drawer(
         child: ListView(
           children: <Widget>[
             new UserAccountsDrawerHeader(
@@ -70,325 +85,15 @@ class _PrincipalPageState extends State<PrincipalPage> {
           ],
         ),
       ),
-      body: Container(
-        height: double.maxFinite,
-        width: double.maxFinite,
-        child: Row(
-          children: <Widget>[
-            Flexible(
-              flex: 1,
-              fit: FlexFit.tight,
-              child: Column(
-                children: <Widget>[
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: GestureDetector(
-                      child: Container(
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              Image.asset('assets/images/psicologia.png'),
-                              Text("Psicologia",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textScaleFactor: 1.5,)
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-                      },
-                    )
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: GestureDetector(
-                      child: Container(
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              new Image.asset('assets/images/mercadeo.png'),
-                              Text("Mercadeo",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textScaleFactor: 1.5,)
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-                      },
-                    )
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: GestureDetector(
-                      child: Container(
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              new Image.asset('assets/images/ing_sistemas.png'),
-                              Text("Sistemas",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textScaleFactor: 1.5,)
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-                      },
-                    )
-                  )
-                ],
-              ),
-            ),
-            Flexible(
-              flex: 1,
-              fit: FlexFit.tight,
-              child: Column(
-                children: <Widget>[
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: GestureDetector(
-                      child: Container(
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              new Image.asset('assets/images/negocios.png'),
-                              Text("Negocios",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textScaleFactor: 1.5,)
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-                      },
-                    )
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: GestureDetector(
-                      child: Container(
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              new Image.asset('assets/images/matematicas.png'),
-                              Text("Matematicas",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textScaleFactor: 1.5,)
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-                      },
-                    )
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: GestureDetector(
-                      child: Container(
-                        child: Card(
-                          child: Column(
-                            children: <Widget>[
-                              new Image.asset('assets/images/ing_industrial.jpg'),
-                              Text("Industrial",                    
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textScaleFactor: 1.5,)
-                            ],
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-                      },
-                    )
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      )
+        body: TabBarView(children: [
+          SystemsLibrary(),
+          Text('Lista 2'),
+          Text('Lista 3'),
+          Text('Lista 4'),
+          Text('Lista 5'),
+          Text('Lista 6'),
+        ]),
+      )),
     );
-    /*Scaffold(
-      appBar: new AppBar(
-        title: new Text("BiblioteK"),
-      ),
-      drawer: new Drawer(
-        child: ListView(
-          children: <Widget>[
-            new UserAccountsDrawerHeader(
-              accountName: new Text('Juan '),
-              accountEmail: new Text('juan@konradlorenz.edu.co'),
-              currentAccountPicture: new CircleAvatar(
-                backgroundImage: new NetworkImage('http://i.pravatar.cc/300'),
-              ),
-            ),
-            new ListTile(
-              title: new Text('Historial'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => new HistorialLibrary()));
-              },
-            ),
-            new ListTile(
-              title: new Text('About'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new AboutPage()));
-              },
-            ),new ListTile(
-              title: new Text('Configuracion'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new SettingsPage()));
-              },
-            ),
-          ],
-        ),
-      ),
-      body: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-        children: <Widget>[
-          new GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new SystemsLibrary()));
-              },
-              child: new Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.lightBlueAccent[400],
-                child: Column(children: <Widget>[
-                  new Image.asset('assets/images/psicologia.png', height: 100),
-                  new Text(
-                    "Psicologia",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaleFactor: 1.5,
-                  ),
-                ]),
-              )),
-          new GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
-                );
-              },
-              child: new Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.lightBlueAccent[400],
-                child: Column(children: <Widget>[
-                  new Image.asset('assets/images/negocios.png', height: 100),
-                  new Text(
-                    "Negocios",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaleFactor: 1.5,
-                  ),
-                ]),
-              )),
-          new GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
-                );
-              },
-              child: new Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.lightBlueAccent[400],
-                child: Column(children: <Widget>[
-                  new Image.asset('assets/images/mercadeo.png', height: 100),
-                  new Text(
-                    "Mercadeo",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaleFactor: 1.5,
-                  ),
-                ]),
-              )),
-          new GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
-                );
-              },
-              child: new Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.lightBlueAccent[400],
-                child: Column(children: <Widget>[
-                  new Image.asset('assets/images/matematicas.png', height: 100),
-                  new Text(
-                    "Matematicas",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaleFactor: 1.5,
-                  ),
-                ]),
-              )),
-          new GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
-                );
-              },
-              child: new Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.lightBlueAccent[400],
-                child: Column(children: <Widget>[
-                  new Image.asset('assets/images/ing_sistemas.png',
-                      height: 100),
-                  new Text(
-                    "Sistemas",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaleFactor: 1.5,
-                  ),
-                ]),
-              )),
-          new GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SystemsLibrary()),
-                );
-              },
-              child: new Container(
-                padding: const EdgeInsets.all(8),
-                color: Colors.lightBlueAccent[400],
-                child: Column(children: <Widget>[
-                  new Image.asset('assets/images/ing_industrial.jpg',
-                      height: 100),
-                  new Text(
-                    "Industrial",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaleFactor: 1.5,
-                  ),
-                ]),
-              )),
-        ],
-      ),
-    );*/
   }
 }

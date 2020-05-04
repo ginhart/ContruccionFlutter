@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+
 class Book extends StatefulWidget {
   Book({Key key}) : super(key: key);
 
@@ -74,13 +75,13 @@ class _BookState extends State<Book> {
                     children: <Widget>[
                       Column(
                         children: <Widget>[
-                          IconButton(icon: Icon(Icons.favorite)),
+                          IconButton(onPressed: null, icon: Icon(Icons.favorite)),
                           Text('Agregar a Favoritos'),
                         ],
                       ),
                       Column(
                         children: <Widget>[
-                          IconButton(icon: Icon(Icons.star)),
+                          IconButton(onPressed: null, icon: Icon(Icons.star)),
                           Text('Agregar a Deseados'),
                         ],
                       )

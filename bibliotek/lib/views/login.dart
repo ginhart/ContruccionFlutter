@@ -42,6 +42,10 @@ class _LoginState extends State<Login> {
                   ),
                   Image.network(
                     "https://desparchado.co/media/organizers/Konrad_Lorenz.png",
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      return Center(child: child);
+                    },
                   ),
                   BeautyTextfield(
                     width: double.maxFinite,
@@ -119,23 +123,23 @@ class _LoginState extends State<Login> {
                       }
                     },
                   ),
-                  Container( 
+                  Container(
                     margin: EdgeInsets.all(10),
-                    child:NiceButton(
-                    width: 255,
-                    elevation: 8.0,
-                    radius: 52.0,
-                    text: "Registrarse",
-                    background: Colors.blue,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Register()),
-                      );
-                    },
-                  ),)
-                 
+                    child: NiceButton(
+                      width: 255,
+                      elevation: 8.0,
+                      radius: 52.0,
+                      text: "Registrarse",
+                      background: Colors.blue,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Register()),
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
             )),

@@ -1,5 +1,9 @@
+import 'package:bibliotek/Models/User.dart';
+import 'package:bibliotek/views/about.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -7,11 +11,14 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(
-          title: new Text('About'),
+          title: new Text('Configuración'),
         ),
         body: ListView(
           children: <Widget>[
@@ -44,7 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Container(
                               padding: EdgeInsets.all(20.0),
                               child: Chip(
-                                label: Text('Juan'),
+                                label: Text('Nombre'),
                                 shadowColor: Colors.blue,
                                 backgroundColor: Colors.lightBlueAccent,
                                 elevation: 10,
@@ -189,6 +196,15 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         )
                       ]).show();
+                },
+              ),
+            ),Container(
+              child: MaterialButton(
+                color: Colors.lightBlueAccent,
+                child: Text('Temas'),
+                onPressed: () {
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new AboutPage()));
                 },
               ),
             ),

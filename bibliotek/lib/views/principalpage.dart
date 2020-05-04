@@ -1,4 +1,6 @@
+import 'package:bibliotek/views/deseados.dart';
 import 'package:bibliotek/views/favorite.dart';
+import 'package:bibliotek/views/favoritos.dart';
 import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +80,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     ),
                   ),
                   new ListTile(
-                    title: new Text('Historial'),
+                    title: Row(children: [Icon(Icons.schedule), Text('Libros Deseados.')],),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -94,7 +96,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
               },
             ),*/
                   new ListTile(
-                    title: new Text('Libros Favoritos'),
+                    title: Row(children: [Icon(Icons.star), Text('Libros Favoritos.')],),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -103,7 +105,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     },
                   ),
                   new ListTile(
-                    title: new Text('Libros Deseados'),
+                   title: Row(children: [Icon(Icons.favorite), Text('Libros Deseados.')],),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -112,7 +114,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     },
                   ),
                   new ListTile(
-                    title: new Text('Configuracion'),
+                    title: Row(children: [Icon(Icons.settings), Text('Configuración.')],),
                     onTap: () {
                       Navigator.push(
                           context,

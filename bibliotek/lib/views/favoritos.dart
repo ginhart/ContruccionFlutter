@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 
 
-class Deseados extends StatefulWidget {
-  Deseados({Key key}) : super(key: key);
+class Favoritos extends StatefulWidget {
+  Favoritos({Key key}) : super(key: key);
 
   @override
-  _DeseadosState createState() => _DeseadosState();
+  _FavoritosState createState() => _FavoritosState();
 }
 
-class _DeseadosState extends State<Deseados> {
+class _FavoritosState extends State<Favoritos> {
 
   Widget _inputsearch=new Container(); 
 
@@ -63,7 +63,7 @@ class _DeseadosState extends State<Deseados> {
             children: <Widget>[
               _inputsearch,
               Text(
-                'Libros Deseados.',
+                'Libros Favoritos.',
                 style: TextStyle(
                     color: Colors.grey[800],
                     fontWeight: FontWeight.w800,
@@ -83,10 +83,6 @@ class _DeseadosState extends State<Deseados> {
                       Text(
                         'El Gran Libro de Android.',
                         style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        'Disponibilidad: 0',
-                        style: TextStyle(fontSize: 18),
                       )
                     ],
                   ),
@@ -94,7 +90,7 @@ class _DeseadosState extends State<Deseados> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Deseados()),
+                    MaterialPageRoute(builder: (context) => Favoritos()),
                   );
                 },
               )

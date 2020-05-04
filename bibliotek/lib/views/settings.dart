@@ -1,7 +1,6 @@
-import 'package:bibliotek/Models/User.dart';
-import 'package:bibliotek/views/about.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:bibliotek/Models/Options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 
@@ -12,7 +11,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  
+  int _selectedOption = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,55 +19,84 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: new AppBar(
           title: new Text('Configuración'),
         ),
-        body: ListView(
+        body: Column(
           children: <Widget>[
-            Container(
-                height: 130,
-                child: Card(
-                    elevation: 10,
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "http://i.pravatar.cc/300"),
-                                    fit: BoxFit.cover),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(75.0)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 7.0, color: Colors.black)
-                                ]),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                              padding: EdgeInsets.all(20.0),
-                              child: Chip(
-                                label: Text('Nombre'),
-                                shadowColor: Colors.blue,
-                                backgroundColor: Colors.lightBlueAccent,
-                                elevation: 10,
-                              )),
-                        )
-                      ],
-                    ))),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text("Perfil", textScaleFactor: 1.5),
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Card(
+                child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage("http://i.pravatar.cc/300"),
+                      minRadius: 1,
+                      maxRadius: 30,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text("Configuracion",
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textScaleFactor: 2,
+                    )
+                  )
+                ],
+              ),
             ),
-            Container(
-              child: MaterialButton(
-                color: Colors.lightBlueAccent,
-                child: Text('Carmbiar contraseña'),
-                onPressed: () {
-                  Alert(
+            ),
+            Flexible(
+              flex: 7,
+              fit: FlexFit.tight,
+              child: 
+              ListView.builder(
+                itemCount: options.length + 2,
+                itemBuilder: (BuildContext context, int index) {
+                if (index == 0) {
+                  return SizedBox(height: 15.0);
+                } else if (index == options.length + 1) {
+                  return SizedBox(height: 100.0);
+                }
+              return Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.all(10.0),
+              width: double.infinity,
+              height: 80.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                border: _selectedOption == index - 1
+                  ? Border.all(color: Colors.black26)
+                  : null,
+                ),
+              child: ListTile(
+                leading: options[index - 1].icon,
+                title: Text(
+                  options[index - 1].title,
+                  style: TextStyle(
+                    color: _selectedOption == index - 1
+                      ? Colors.black
+                      : Colors.grey[600],
+                ),
+              ),
+              subtitle: Text(
+                options[index - 1].subtitle,
+                style: TextStyle(
+                  color:
+                      _selectedOption == index - 1 ? Colors.black : Colors.grey,
+                ),
+              ),
+              selected: _selectedOption == index - 1,
+              onTap: () {
+                setState(() {
+                  _selectedOption = index - 1;
+                });
+                switch (index - 1) {
+                  case 1:
+                    Alert(
                       context: context,
                       title: "Cambiar contraseña",
                       content: Column(
@@ -104,155 +132,17 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         )
                       ]).show();
-                },
-              ),
+                    break;
+                  default:
+                }
+              },
             ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text("Aplicacion", textScaleFactor: 1.5),
-            ),
-            Container(
-              child: MaterialButton(
-                color: Colors.lightBlueAccent,
-                child: Text('Idioma'),
-                onPressed: () {
-                  Alert(
-                      context: context,
-                      title: "Cambiar contraseña",
-                      content: Column(
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'antigua contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'confirmar contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'Nueva contraseña',
-                            ),
-                          ),
-                        ],
-                      ),
-                      buttons: [
-                        DialogButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            "Cambiar",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        )
-                      ]).show();
-                },
-              ),
-            ),
-            Container(
-              child: MaterialButton(
-                color: Colors.lightBlueAccent,
-                child: Text('Notificaciones'),
-                onPressed: () {
-                  Alert(
-                      context: context,
-                      title: "Cambiar contraseña",
-                      content: Column(
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'antigua contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'confirmar contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'Nueva contraseña',
-                            ),
-                          ),
-                        ],
-                      ),
-                      buttons: [
-                        DialogButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            "Cambiar",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        )
-                      ]).show();
-                },
-              ),
-            ),Container(
-              child: MaterialButton(
-                color: Colors.lightBlueAccent,
-                child: Text('Temas'),
-                onPressed: () {
-                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new AboutPage()));
-                },
-              ),
-            ),
-            Container(
-              child: MaterialButton(
-                color: Colors.lightBlueAccent,
-                child: Text('Tamaño de fuente'),
-                onPressed: () {
-                  Alert(
-                      context: context,
-                      title: "Cambiar contraseña",
-                      content: Column(
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'antigua contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'confirmar contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'Nueva contraseña',
-                            ),
-                          ),
-                        ],
-                      ),
-                      buttons: [
-                        DialogButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            "Cambiar",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        )
-                      ]).show();
-                },
-              ),
-            ),
+          );
+        },
+      ),
+            )
           ],
-        ));
+        )
+    );
   }
 }

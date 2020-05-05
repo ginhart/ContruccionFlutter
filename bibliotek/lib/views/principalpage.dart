@@ -87,7 +87,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     ),
                   ),
                   new ListTile(
-                    title: Row(children: [Icon(Icons.schedule), Text('Libros Deseados.')],),
+                    title: Row(children: [Icon(Icons.schedule), Text('Historial.')],),
                     onTap: () {
                       Navigator.push(
                           context,

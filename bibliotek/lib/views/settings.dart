@@ -11,6 +11,8 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   int _selectedOption = 0;
 
   @override
@@ -125,7 +127,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       buttons: [
                         DialogButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () => {
+                            //Cambio de contraseña aqui
+                            Navigator.pop(context)
+                          },
                           child: Text(
                             "Cambiar",
                             style: TextStyle(color: Colors.white, fontSize: 20),

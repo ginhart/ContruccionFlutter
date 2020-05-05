@@ -1,8 +1,11 @@
 import 'package:bibliotek/Models/Book.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../functions/Global.dart' as Global;
+import 'package:toast/toast.dart';
 
 class Book extends StatefulWidget {
-   BookModel libro = new BookModel();
+  BookModel libro = new BookModel();
   Book({Key key, this.libro}) : super(key: key);
 
   @override
@@ -11,6 +14,7 @@ class Book extends StatefulWidget {
 
 class _BookState extends State<Book> {
   Book book = new Book();
+  final Firestore _db = Firestore.instance;
 
   Widget bookDescriptionTemplate(book) {
     return Card(
@@ -23,7 +27,6 @@ class _BookState extends State<Book> {
                 child: Container(
                   margin: EdgeInsets.only(left: 10),
                   child: Image.network(
-
                     widget.libro.imagen,
                     //height: 300,
                   ),
@@ -72,7 +75,7 @@ class _BookState extends State<Book> {
             ),
             ListTile(
               title: Text('Tiempo Restante:'),
-              subtitle: Text('decrpcion'),
+              subtitle: Text('00:00'),
             ),
           ],
         )),
@@ -88,13 +91,51 @@ class _BookState extends State<Book> {
             child: ButtonBar(
           children: <Widget>[
             RaisedButton(
-              onPressed: null,
+              onPressed: () {
+                _db
+                    .collection('Usuarios')
+                    .document(Global.user.id)
+                    .collection('Favoritos')
+                    .document(widget.libro.id)
+                    .setData({
+                  'Nombre': widget.libro.nombre,
+                  'Autor': widget.libro.autor,
+                  'Editorial': widget.libro.editorial,
+                  'Páginas': widget.libro.paginas,
+                  'Facultad': widget.libro.facultad,
+                  'Disponibilidad': widget.libro.disponibilidad,
+                  'Imagen': widget.libro.imagen
+                }).then((value) => {
+                          Toast.show("Libro agregado a Favoritos.", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM)
+                        });
+              },
               child: Row(
                 children: [Text('Agregar a Favoritos'), Icon(Icons.star)],
               ),
             ),
             RaisedButton(
-              onPressed: null,
+              onPressed: (){
+                _db
+                    .collection('Usuarios')
+                    .document(Global.user.id)
+                    .collection('Deseados')
+                    .document(widget.libro.id)
+                    .setData({
+                  'Nombre': widget.libro.nombre,
+                  'Autor': widget.libro.autor,
+                  'Editorial': widget.libro.editorial,
+                  'Páginas': widget.libro.paginas,
+                  'Facultad': widget.libro.facultad,
+                  'Disponibilidad': widget.libro.disponibilidad,
+                  'Imagen': widget.libro.imagen
+                }).then((value) => {
+                          Toast.show("Libro agregado a Deseados.", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM)
+                        });
+              },
               child: Row(
                 children: [Text('Agregar a Deseados'), Icon(Icons.favorite)],
               ),

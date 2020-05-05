@@ -163,7 +163,9 @@ class _RegisterState extends State<Register> {
                           'Apellido': usuario.apellido,
                           'Facultad': usuario.facultad
                         }).then((value) =>  {
+
                                   Global.user = usuario,
+                                  Global.user.id = result.user.uid,
                                   Navigator.of(context).pop(),
                                   Navigator.push(
                                     context,

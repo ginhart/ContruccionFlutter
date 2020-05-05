@@ -21,6 +21,7 @@ class _IndustrialLibraryState extends State<IndustrialLibrary> {
     return Container(
         child: Scaffold(
       appBar: AppBar(
+        //title: Text('Libros de Industrial.'),
         actions: <Widget>[
           // action button
           IconButton(
@@ -100,20 +101,22 @@ class _IndustrialLibraryState extends State<IndustrialLibrary> {
 
       print(libro);
       return GestureDetector(
-        child: SingleChildScrollView(scrollDirection: Axis.horizontal,
+        child: Container(//SingleChildScrollView(scrollDirection: Axis.horizontal,
             child: Card( 
           child: Row(
             children: <Widget>[
               Image.network(
                 snapshot.data['Imagen'],
                 height: 150,
-              ), Column(children: [
-                Text(
+              ), Expanded(child:
+                Container(
+                  margin: EdgeInsets.all(5),
+                child:Text(
                 snapshot.data['Nombre'],
                 style: TextStyle(fontSize: 18),
-              ),
+              ),)
               
-              ],)
+              ,)
               
             ],
           ),

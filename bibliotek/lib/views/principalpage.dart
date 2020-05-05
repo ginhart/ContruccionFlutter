@@ -21,7 +21,6 @@ import '../functions/Global.dart' as Global;
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -79,7 +78,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
               child: ListView(
                 children: <Widget>[
                   new UserAccountsDrawerHeader(
-                    accountName: new Text(Global.user.nombre + ' ' + Global.user.apellido),
+                    accountName: new Text(
+                        Global.user.nombre + ' ' + Global.user.apellido),
                     accountEmail: new Text(Global.user.correo),
                     currentAccountPicture: new CircleAvatar(
                       backgroundImage:
@@ -87,7 +87,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     ),
                   ),
                   new ListTile(
-                    title: Row(children: [Icon(Icons.schedule), Text('Historial.')],),
+                    title: Row(
+                      children: [Icon(Icons.schedule), Text('Historial.')],
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -95,15 +97,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
                               builder: (context) => new HistorialLibrary()));
                     },
                   ),
-                  /*new ListTile(
-              title: new Text('Temas'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new AboutPage()));
-              },
-            ),*/
                   new ListTile(
-                    title: Row(children: [Icon(Icons.star), Text('Libros Favoritos.')],),
+                    title: Row(
+                      children: [Icon(Icons.star), Text('Libros Favoritos.')],
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -112,7 +109,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     },
                   ),
                   new ListTile(
-                   title: Row(children: [Icon(Icons.favorite), Text('Libros Deseados.')],),
+                    title: Row(
+                      children: [
+                        Icon(Icons.favorite),
+                        Text('Libros Deseados.')
+                      ],
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -121,25 +123,37 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     },
                   ),
                   new ListTile(
-                    title: Row(children: [Icon(Icons.settings), Text('Configuración.')],),
+                    title: Row(
+                      children: [Icon(Icons.settings), Text('Configuración.')],
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => new SettingsPage()));
                     },
-                  ),
+                  ),new ListTile(
+              title: new Text('Temas'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new AboutPage()));
+              },
+            ),
                   new ListTile(
-                    title: Row(children: [Icon(Icons.exit_to_app), Text('Cerrar Sesión')],),
+                    title: Row(
+                      children: [
+                        Icon(Icons.exit_to_app),
+                        Text('Cerrar Sesión')
+                      ],
+                    ),
                     onTap: () {
                       logeo.logout().then((value) => {
-                        Navigator.of(context).pop(),
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => new Login()))
-                      });
-                      
+                            Navigator.of(context).pop(),
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => new Login()))
+                          });
                     },
                   ),
                 ],
@@ -150,7 +164,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
               BusinessLibrary(),
               MarketingLibrary(),
               MathLibrary(),
-             
               SystemsLibrary(),
               IndustrialLibrary(),
             ]),

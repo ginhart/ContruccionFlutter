@@ -1,3 +1,4 @@
+import 'package:bibliotek/Services/AutService.dart';
 import 'package:bibliotek/views/deseados.dart';
 
 import 'package:bibliotek/views/favoritos.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
 import './about.dart';
 import 'deseados.dart';
+import 'login.dart';
 import 'psychologylibrary.dart';
 import 'businesslibrary.dart';
 import 'marketinglibrary.dart';
@@ -19,6 +21,7 @@ import '../functions/Global.dart' as Global;
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -40,6 +43,7 @@ class PrincipalPage extends StatefulWidget {
 // }
 
 class _PrincipalPageState extends State<PrincipalPage> {
+  Autentication logeo = new Autentication();
   @override
   Widget build(buildContext) {
     return MaterialApp(
@@ -123,6 +127,19 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => new SettingsPage()));
+                    },
+                  ),
+                  new ListTile(
+                    title: Row(children: [Icon(Icons.exit_to_app), Text('Cerrar Sesión')],),
+                    onTap: () {
+                      logeo.logout().then((value) => {
+                        Navigator.of(context).pop(),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => new Login()))
+                      });
+                      
                     },
                   ),
                 ],

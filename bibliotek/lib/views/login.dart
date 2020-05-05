@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
+import 'package:toast/toast.dart';
 import '../functions/Global.dart' as Global;
 
 class Login extends StatefulWidget {
@@ -138,7 +139,12 @@ class _LoginState extends State<Login> {
                             _error = 'Por favor revisa tu correo y contraseña';
                             break;
                         }
+                         Toast.show("${_error}", context,
+                              duration: Toast.LENGTH_SHORT,
+                              gravity: Toast.BOTTOM);
+                        
                       }
+                      
                     },
                   ),
                   Container(

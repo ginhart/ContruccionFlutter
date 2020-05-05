@@ -11,4 +11,8 @@ class Autentication {
   Future login(String correo, String password){
   return _auth.signInWithEmailAndPassword(email: correo, password: password);
   }
+
+  Future logout(){
+    return _auth.signOut();
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:bibliotek/Services/AutService.dart';
 import 'package:bibliotek/views/deseados.dart';
-
+import 'package:bibliotek/blocs/them.dart';
 import 'package:bibliotek/views/favoritos.dart';
 import 'package:bibliotek/views/settings.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
@@ -15,10 +15,11 @@ import 'businesslibrary.dart';
 import 'marketinglibrary.dart';
 import 'mathlibrary.dart';
 import 'industriallibrary.dart';
+import 'package:provider/provider.dart';
 
 import '../functions/Global.dart' as Global;
 
-void main() => runApp(new MyApp());
+/*void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,9 +28,10 @@ class MyApp extends StatelessWidget {
       home: new PrincipalPage(),
     );
   }
-}
+}*/
 
 class PrincipalPage extends StatefulWidget {
+  PrincipalPage({Key key}) : super(key: key);
   @override
   _PrincipalPageState createState() => _PrincipalPageState();
 }
@@ -45,7 +47,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
   Autentication logeo = new Autentication();
   @override
   Widget build(buildContext) {
+    final theme = Provider.of<ThemeChanger>(context);
     return MaterialApp(
+      theme: theme.getTheme(),
       home: DefaultTabController(
           length: 6,
           child: Scaffold(

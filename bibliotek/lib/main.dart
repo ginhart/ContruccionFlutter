@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-  /*  return MaterialApp(
+    /*  return MaterialApp(
       title: 'BiblioteK',
       theme: ThemeData(
      
@@ -27,21 +27,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {*/
     return ChangeNotifierProvider(
       create: (_) => ThemeChanger(ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.indigo,
-            accentColor: Colors.indigoAccent,
-          )),
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.indigo,
+        accentColor: Colors.indigoAccent,
+      )),
       child: MaterialAppWithTheme(),
     );
   }
 }
 
-class MaterialAppWithTheme extends StatelessWidget  {
-
+class MaterialAppWithTheme extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
-
-final theme = Provider.of<ThemeChanger>(context);
+  Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeChanger>(context);
 
     return MaterialApp(
       theme: theme.getTheme(),
@@ -50,4 +48,3 @@ final theme = Provider.of<ThemeChanger>(context);
     );
   }
 }
-

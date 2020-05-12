@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:bibliotek/blocs/them.dart';
+import 'package:Bibliotek/blocs/them.dart';
 
 class AboutPage extends StatelessWidget {
   @override

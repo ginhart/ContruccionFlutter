@@ -1,4 +1,4 @@
-import 'package:bibliotek/Models/User.dart';
+import 'package:Bibliotek/Models/User.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Autentication {

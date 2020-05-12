@@ -1,5 +1,5 @@
-import 'package:bibliotek/functions/BeautyTextfield.dart';
-import 'package:bibliotek/views/historial.dart';
+import 'package:Bibliotek/functions/BeautyTextfield.dart';
+import 'package:Bibliotek/views/historial.dart';
 import 'package:flutter/material.dart';
 
 import 'historial.dart';

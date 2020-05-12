@@ -1,4 +1,4 @@
-import 'package:bibliotek/Models/Book.dart';
+import 'package:Bibliotek/Models/Book.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../functions/Global.dart' as Global;

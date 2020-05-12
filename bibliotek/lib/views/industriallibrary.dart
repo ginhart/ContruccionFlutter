@@ -1,7 +1,7 @@
-import 'package:bibliotek/Models/Book.dart';
-import 'package:bibliotek/Services/Consulta.dart';
-import 'package:bibliotek/functions/BeautyTextfield.dart';
-import 'package:bibliotek/views/book.dart';
+import 'package:Bibliotek/Models/Book.dart';
+import 'package:Bibliotek/Services/Consulta.dart';
+import 'package:Bibliotek/functions/BeautyTextfield.dart';
+import 'package:Bibliotek/views/book.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

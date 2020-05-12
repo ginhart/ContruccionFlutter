@@ -1,5 +1,5 @@
-import 'package:bibliotek/Models/Book.dart';
-import 'package:bibliotek/functions/BeautyTextfield.dart';
+import 'package:Bibliotek/Models/Book.dart';
+import 'package:Bibliotek/functions/BeautyTextfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../functions/Global.dart' as Global;
 import 'package:flutter/material.dart';

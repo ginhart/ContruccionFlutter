@@ -1,8 +1,8 @@
-import 'package:bibliotek/Models/User.dart';
-import 'package:bibliotek/Services/AutService.dart';
-import 'package:bibliotek/functions/BeautyTextfield.dart';
-import 'package:bibliotek/views/login.dart';
-import 'package:bibliotek/views/principalpage.dart';
+import 'package:Bibliotek/Models/User.dart';
+import 'package:Bibliotek/Services/AutService.dart';
+import 'package:Bibliotek/functions/BeautyTextfield.dart';
+import 'package:Bibliotek/views/login.dart';
+import 'package:Bibliotek/views/principalpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -162,17 +162,18 @@ class _RegisterState extends State<Register> {
                           'Nombre': usuario.nombre,
                           'Apellido': usuario.apellido,
                           'Facultad': usuario.facultad
-                        }).then((value) =>  {
-
-                                  Global.user = usuario,
-                                  Global.user.id = result.user.uid,
-                                  Navigator.of(context).pop(),
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PrincipalPage()),
-                                  )
-                                });
+                        }).then((value) {
+                          print("esta entrando");
+                        Global.user = usuario;
+                        Global.user.id = result.user.uid;
+                        //Navigator.of(context).pop();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PrincipalPage()),
+                        );
+                        });
+                        
                       } catch (error) {
                         String _error;
                         print('Falle al registrar ${error.code}');

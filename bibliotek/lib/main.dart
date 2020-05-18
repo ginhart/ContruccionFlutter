@@ -2,6 +2,7 @@
 import 'package:bibliotek/blocs/them.dart';
 import 'package:bibliotek/views/login.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -25,6 +26,7 @@ class MaterialAppWithTheme extends StatelessWidget  {
 final theme = Provider.of<ThemeChanger>(context);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: theme.getTheme(),
       home: Login(),
     );

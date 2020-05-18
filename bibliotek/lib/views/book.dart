@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class Book extends StatefulWidget {
@@ -74,14 +74,14 @@ class _BookState extends State<Book> {
                     children: <Widget>[
                       Column(
                         children: <Widget>[
-                          IconButton(icon: Icon(Icons.favorite)),
-                          Text('Agregar a Favoritos'),
+                          FadeInDown(child: IconButton(icon: Icon(Icons.favorite)),duration: Duration(seconds:1),),
+                          FadeInUp(child: Text('Agregar a Favoritos'),),
                         ],
                       ),
                       Column(
                         children: <Widget>[
-                          IconButton(icon: Icon(Icons.star)),
-                          Text('Agregar a Deseados'),
+                          FadeInDown(child: IconButton(icon: Icon(Icons.star)),duration: Duration(seconds:1),),
+                          FadeInUp(child: Text('Agregar a Deseados'),),
                         ],
                       )
                     ],

@@ -2,62 +2,59 @@ import 'package:bibliotek/functions/BeautyTextfield.dart';
 import 'package:bibliotek/views/book.dart';
 import 'package:bibliotek/views/dummy/carrera.dart';
 import 'package:flutter/material.dart';
+import 'package:animate_do/animate_do.dart';
 
 class SystemsLibrary extends StatefulWidget {
-
-    SystemsLibrary({
+  SystemsLibrary({
     @required this.isInDualPanelLayout,
     @required this.card,
   });
 
-
-   bool isInDualPanelLayout;
-   Carrera card;
+  bool isInDualPanelLayout;
+  Carrera card;
 
   @override
   _SystemsLibraryState createState() => _SystemsLibraryState();
-
 }
 
 class _SystemsLibraryState extends State<SystemsLibrary> {
-
-  Widget _inputsearch=new Container(); 
+  Widget _inputsearch = new Container();
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
       appBar: AppBar(
-    
         actions: <Widget>[
           // action button
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(() {
-                _inputsearch=
-                BeautyTextfield(
-                width: double.maxFinite,
-                height: 60,
-                maxLines: 1,
-                duration: Duration(milliseconds: 300),
-                inputType: TextInputType.text,
-                placeholder: "...",
-                prefixIcon: Icon(Icons.search),
-                backgroundColor: Colors.white54,
-                onTap: () {
-                  print('Click');
-                },
-                
-                onChanged: (text) { 
-                  print(text);
-                },
-                onSubmitted: (data) {
-                  print(data.length);
-                },
-              );
-              });
-            },
+          Roulette(
+            child: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                setState(() {
+                  _inputsearch = BeautyTextfield(
+                    width: double.maxFinite,
+                    height: 60,
+                    maxLines: 1,
+                    duration: Duration(milliseconds: 300),
+                    inputType: TextInputType.text,
+                    placeholder: "...",
+                    prefixIcon: Icon(Icons.search),
+                    backgroundColor: Colors.white54,
+                    onTap: () {
+                      print('Click');
+                    },
+                    onChanged: (text) {
+                      print(text);
+                    },
+                    onSubmitted: (data) {
+                      print(data.length);
+                    },
+                  );
+                });
+              },
+            ),
+            duration: Duration(seconds: 10),
           ),
           // action button
 
@@ -72,7 +69,7 @@ class _SystemsLibraryState extends State<SystemsLibrary> {
             children: <Widget>[
               _inputsearch,
               Text(
-                widget.card?.tituloCarrera?? "seleccione una carrera" ,
+                widget.card?.tituloCarrera ?? "seleccione una carrera",
                 style: TextStyle(
                     color: Colors.grey[800],
                     fontWeight: FontWeight.w800,
@@ -80,17 +77,17 @@ class _SystemsLibraryState extends State<SystemsLibrary> {
                     fontFamily: 'Open Sans',
                     fontSize: 25),
               ),
-              
               GestureDetector(
                 child: Card(
                   child: Row(
                     children: <Widget>[
                       Image.asset(
-                        widget.card?.imagenLibro?? "assets/images/no-image-available-sign-internet-260nw-261719003.jpg",
+                        widget.card?.imagenLibro ??
+                            "assets/images/no-image-available-sign-internet-260nw-261719003.jpg",
                         height: 100,
                       ),
                       Text(
-                        widget.card?.tituloLibro?? "seleccione una carrera",
+                        widget.card?.tituloLibro ?? "seleccione una carrera",
                         style: TextStyle(fontSize: 15),
                       )
                     ],

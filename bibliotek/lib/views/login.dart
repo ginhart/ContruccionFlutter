@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:bibliotek/functions/BeautyTextfield.dart';
 import 'package:bibliotek/views/principalpage.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,8 @@ class _LoginState extends State<Login> {
                     elevation: 8.0,
                     radius: 52.0,
                     text: "Entrar",
-                    background: Colors.blue,
+                    background:
+                     Colors.blue,
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.push(
@@ -90,6 +92,7 @@ class _LoginState extends State<Login> {
                       );
                     },
                   ),
+                  
                 ],
               ),
             )),

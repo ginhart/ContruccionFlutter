@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:bibliotek/functions/BeautyTextfield.dart';
 import 'package:bibliotek/views/book.dart';
 import 'package:bibliotek/views/historial.dart';
@@ -16,6 +17,7 @@ class HistorialLibrary extends StatefulWidget {
 
 class _HistorialLibraryState extends State<HistorialLibrary> {
 
+
   Widget _inputsearch=new Container(); 
 
   @override
@@ -26,8 +28,7 @@ class _HistorialLibraryState extends State<HistorialLibrary> {
        title: Text("Historial"),
         actions: <Widget>[
           
-          // action button
-          IconButton(
+          Roulette(child: IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
               setState(() {
@@ -54,10 +55,10 @@ class _HistorialLibraryState extends State<HistorialLibrary> {
               });
             },
             
+          ), 
+          duration: Duration(seconds:10),
           ),
-          // action button
-
-          // overflow menu
+           
         ],
       ),
       body: MasterDetailContainer2()

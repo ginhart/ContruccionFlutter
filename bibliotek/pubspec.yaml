@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   provider: ^4.0.5+1
   nice_button: ^0.1.7
+  animate_do: ^1.7.2
   
 
 dev_dependencies:

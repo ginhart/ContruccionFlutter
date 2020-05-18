@@ -6,7 +6,25 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<BorderRadius> _borderRadius;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller =
+        AnimationController(duration: const Duration(seconds: 2), vsync: this)
+          ..repeat(reverse: true);
+
+    _borderRadius = BorderRadiusTween(
+      begin: BorderRadius.circular(100.0),
+      end: BorderRadius.circular(0.0),
+    ).animate(_controller);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,22 +41,21 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "http://i.pravatar.cc/300"),
-                                    fit: BoxFit.cover),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(75.0)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 7.0, color: Colors.black)
-                                ]),
-                          ),
+                          child: AnimatedBuilder(
+                              animation: _borderRadius,
+                              builder: (context, child) {
+                                return Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "http://i.pravatar.cc/300"),
+                                    ),
+                                    borderRadius: _borderRadius.value,
+                                  ),
+                                );
+                              }),
                         ),
                         GestureDetector(
                           child: Container(
@@ -199,27 +216,33 @@ class _SettingsPageState extends State<SettingsPage> {
                 onPressed: () {
                   Alert(
                       context: context,
-                      title: "Cambiar contraseña",
+                      title: ('Tamaño de fuente'),
                       content: Column(
                         children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'antigua contraseña',
+                          DialogButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              "Texto Grande",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
                             ),
                           ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'confirmar contraseña',
+                          Divider(),
+                          DialogButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              "Texto mediano",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'Nueva contraseña',
+                          Divider(),
+                          DialogButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              "Texto pequeño",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                           ),
                         ],
@@ -238,5 +261,11 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ],
         ));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

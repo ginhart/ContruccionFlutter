@@ -9,7 +9,7 @@ class AboutPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Temas'),
+        title: Text(''),
       ),
       body: ListaBotones(),
     );

@@ -28,5 +28,6 @@ final options = [
     icon: Icon(Icons.color_lens, size: 40.0),
     title: 'Tema',
     subtitle: 'Cambia los colores de la app.',
+    
   ),
 ];

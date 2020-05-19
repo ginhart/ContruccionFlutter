@@ -136,13 +136,15 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           MaterialPageRoute(
                               builder: (context) => new SettingsPage()));
                     },
-                  ),new ListTile(
+                  ),
+                  
+                 /* new ListTile(
               title: new Text('Temas'),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => new AboutPage()));
               },
-            ),
+            ),*/
                   new ListTile(
                     title: Row(
                       children: [

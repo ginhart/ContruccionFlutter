@@ -42,6 +42,7 @@ class MaterialAppWithTheme extends StatelessWidget {
     final theme = Provider.of<ThemeChanger>(context);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: theme.getTheme(),
       title: 'Bibliotek',
       home: Login(),

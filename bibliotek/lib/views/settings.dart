@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:Bibliotek/Models/Options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
+import 'package:provider/provider.dart';
+import 'package:Bibliotek/blocs/them.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -10,13 +11,14 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   int _selectedOption = 0;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeChanger>(context);
+
     return Scaffold(
         appBar: new AppBar(
           title: new Text('Configuración'),
@@ -28,126 +30,203 @@ class _SettingsPageState extends State<SettingsPage> {
               fit: FlexFit.tight,
               child: Card(
                 child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage("http://i.pravatar.cc/300"),
-                      minRadius: 1,
-                      maxRadius: 30,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage("http://i.pravatar.cc/300"),
+                        minRadius: 1,
+                        maxRadius: 30,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text("Configuracion",
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textScaleFactor: 2,
-                    )
-                  )
-                ],
+                    Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Configuracion",
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          textScaleFactor: 2,
+                        ))
+                  ],
+                ),
               ),
-            ),
             ),
             Flexible(
               flex: 7,
               fit: FlexFit.tight,
-              child: 
-              ListView.builder(
+              child: ListView.builder(
                 itemCount: options.length + 2,
                 itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
-                  return SizedBox(height: 15.0);
-                } else if (index == options.length + 1) {
-                  return SizedBox(height: 100.0);
-                }
-              return Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.all(10.0),
-              width: double.infinity,
-              height: 80.0,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                border: _selectedOption == index - 1
-                  ? Border.all(color: Colors.black26)
-                  : null,
-                ),
-              child: ListTile(
-                leading: options[index - 1].icon,
-                title: Text(
-                  options[index - 1].title,
-                  style: TextStyle(
-                    color: _selectedOption == index - 1
-                      ? Colors.black
-                      : Colors.grey[600],
-                ),
-              ),
-              subtitle: Text(
-                options[index - 1].subtitle,
-                style: TextStyle(
-                  color:
-                      _selectedOption == index - 1 ? Colors.black : Colors.grey,
-                ),
-              ),
-              selected: _selectedOption == index - 1,
-              onTap: () {
-                setState(() {
-                  _selectedOption = index - 1;
-                });
-                switch (index - 1) {
-                  case 1:
-                    Alert(
-                      context: context,
-                      title: "Cambiar contraseña",
-                      content: Column(
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'antigua contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'confirmar contraseña',
-                            ),
-                          ),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              icon: Icon(Icons.lock),
-                              labelText: 'Nueva contraseña',
-                            ),
-                          ),
-                        ],
+                  if (index == 0) {
+                    return SizedBox(height: 15.0);
+                  } else if (index == options.length + 1) {
+                    return SizedBox(height: 100.0);
+                  }
+                  return Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(10.0),
+                    width: double.infinity,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      //color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: _selectedOption == index - 1
+                          ? Border.all(color: Colors.black26)
+                          : null,
+                    ),
+                    child: ListTile(
+                      leading: options[index - 1].icon,
+                      title: Text(
+                        options[index - 1].title,
+                        style: TextStyle(
+                          color: _selectedOption == index - 1
+                              ? Colors.black
+                              : Colors.grey[600],
+                        ),
                       ),
-                      buttons: [
-                        DialogButton(
-                          onPressed: () => {
-                            //Cambio de contraseña aqui
-                            Navigator.pop(context)
-                          },
-                          child: Text(
-                            "Cambiar",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        )
-                      ]).show();
-                    break;
-                  default:
-                }
-              },
-            ),
-          );
-        },
-      ),
+                      subtitle: Text(
+                        options[index - 1].subtitle,
+                        style: TextStyle(
+                          color: _selectedOption == index - 1
+                              ? Colors.black
+                              : Colors.grey,
+                        ),
+                      ),
+                      selected: _selectedOption == index - 1,
+                      onTap: () {
+                        setState(() {
+                          _selectedOption = index - 1;
+                        });
+                        switch (index - 1) {
+                          case 1:
+                            Alert(
+                                context: context,
+                                title: "Cambiar contraseña",
+                                content: Column(
+                                  children: <Widget>[
+                                    TextField(
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.lock),
+                                        labelText: 'antigua contraseña',
+                                      ),
+                                    ),
+                                    TextField(
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.lock),
+                                        labelText: 'confirmar contraseña',
+                                      ),
+                                    ),
+                                    TextField(
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.lock),
+                                        labelText: 'Nueva contraseña',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                buttons: [
+                                  DialogButton(
+                                    onPressed: () => {
+                                      //Cambio de contraseña aqui
+                                      Navigator.pop(context)
+                                    },
+                                    child: Text(
+                                      "Cambiar",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  )
+                                ]).show();
+                            break;
+                          case 2:
+                            break;
+                          case 3:
+                            Alert(
+                                context: context,
+                                title: "Cambiar tema",
+                                content: Column(
+                                  children: <Widget>[
+                                    FlatButton(
+                                      child: Text('Claro'),
+                                      onPressed: () => theme.setTheme(ThemeData(
+                                        primarySwatch: Colors.blue,
+                                        primaryColor: Colors.indigo,
+                                        accentColor: Colors.indigoAccent,
+                                        textTheme: TextTheme(
+                                          headline6: TextStyle(
+                                              fontSize: 36.0,
+                                              color: Colors.black),
+                                          bodyText2: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.black),
+                                        ),
+                                      )),
+                                    ),
+                                    FlatButton(
+                                      child: Text('Oscuro'),
+                                      onPressed: () => theme.setTheme(ThemeData(
+                                        brightness: Brightness.dark,
+                                        primarySwatch: Colors.blue,
+                                        primaryColor: Colors.black,
+                                        accentColor: Colors.indigoAccent,
+                                        textTheme: TextTheme(
+                                          headline6: TextStyle(
+                                              fontSize: 36.0,
+                                              color: Colors.white),
+                                          bodyText2: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white),
+                                        ),
+                                      )),
+                                    ),
+                                    FlatButton(
+                                        child: Text('Verde'),
+                                        onPressed: () => theme.setTheme(
+                                              ThemeData(
+                                                brightness: Brightness.light,
+                                                primarySwatch: Colors.teal,
+                                                primaryColor: Colors.teal,
+                                                accentColor: Colors.teal,
+                                                cardColor: Colors.teal[100],
+                                                textTheme: TextTheme(
+                                                  headline6: TextStyle(
+                                                      fontSize: 36.0,
+                                                      color: Colors.black),
+                                                  bodyText2: TextStyle(
+                                                      fontSize: 14.0,
+                                                      color: Colors.black),
+                                                ),
+                                                // cardTheme: CardTheme(shadowColor: Colors.teal,elevation: 9.0),
+                                              ),
+                                            )),
+                                  ],
+                                ),
+                                buttons: [
+                                  DialogButton(
+                                    onPressed: () => {
+                                      Navigator.pop(context)
+                                    },
+                                    child: Text(
+                                      "Cambiar",
+                                      style: TextStyle(
+                                          ),
+                                    ),
+                                  )
+                                ]).show();
+                            break;
+                          default:
+                        }
+                      },
+                    ),
+                  );
+                },
+              ),
             )
           ],
-        )
-    );
+        ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:bibliotek/views/dummy/carrera.dart';
 import 'package:bibliotek/views/systemslibrary.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 
@@ -30,7 +31,7 @@ class CarrerasClass extends StatelessWidget{
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.0)),
             child: Column(
             children: <Widget>[
-            Image.asset(dataDummy[i].imagenCarrera),
+             FadeInLeft(child:  Image.asset(dataDummy[i].imagenCarrera),duration: Duration(seconds:2),),
          ListTile(
           title: Text(dataDummy[i].tituloCarrera),
           onTap: ()=> carreraSelectedCallback(dataDummy[i]),

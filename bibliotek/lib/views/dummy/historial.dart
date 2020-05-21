@@ -38,8 +38,8 @@ List<Libro> dataDummyLibro = <Libro>[
 
 
   new Libro(
-    imagenLibro: 'assets/images/sistemas.jpg',
-    nombre: 'Introducion a la ingenieria de sistemas',
+    imagenLibro: 'assets/images/matematicas.jpeg',
+    nombre: 'Matematicas',
     autor: 'Zayri',
     editorial: 'amateratsu',
     paginas: '1000',

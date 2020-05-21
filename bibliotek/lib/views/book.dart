@@ -80,6 +80,7 @@ class _BookState extends State<Book> {
                       ),
                       Column(
                         children: <Widget>[
+                          
                           FadeInDown(child: IconButton(icon: Icon(Icons.star)),duration: Duration(seconds:1),),
                           FadeInUp(child: Text('Agregar a Deseados'),),
                         ],

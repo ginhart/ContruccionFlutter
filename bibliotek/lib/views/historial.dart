@@ -1,6 +1,8 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:bibliotek/views/dummy/carrera.dart';
 import 'package:bibliotek/views/dummy/historial.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Historial extends StatefulWidget {
 
@@ -39,15 +41,15 @@ class _HistorialState extends State<Historial> {@override
       child: new Column(
         children: <Widget>[
           // Agregamos una imagen consumida desde internet
-          new Image.asset(widget.card?.imagenLibro?? "assets/images/no-image-available-sign-internet-260nw-261719003.jpg",),
+           FadeInDown(child:  Image.asset(widget.card?.imagenLibro?? "assets/images/no-image-available-sign-internet-260nw-261719003.jpg",),duration: Duration(milliseconds: 800),from: 20.1,),
           // Agregamos un contenedor para el texto
           new Container(
-            padding: const EdgeInsets.all(10.0), // Un padding para todo
+            padding: const EdgeInsets.all(10), // Un padding para todo
             child: Column(
               children: <Widget>[
              Text(
                "Nombre del libro:",
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -105,18 +107,54 @@ class _HistorialState extends State<Historial> {@override
                 // Agregamos los botones de tipo Flat, un icono, un texto y un evento
                 new FlatButton.icon(
                   // Un icono puede recibir muchos atributos, aqui solo usaremos icono, tamaño y color
-                  icon: const Icon(Icons.favorite, size: 15.0, color: Colors.redAccent),
+                  icon: const Icon(Icons.favorite, size: 15.0, color: Colors.redAccent,  ),
                   label: const Text('Agregar a Favoritos',textScaleFactor: 0.7,),
                   // Esto mostrara 'Me encanta' por la terminal
                   onPressed: () {
-                    print('Me encanta');
+                    Alert(
+                    context: context,
+                    type: AlertType.success,
+                    title: "Agregar a favoritos",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      ),
+                      DialogButton(child: Text("Canacelar",style: TextStyle(color: Colors.black, fontSize: 20)),
+                      onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      )
+                    ],
+                  ).show();
                   },
                 ),
                 new FlatButton.icon(
                   icon: const Icon(Icons.star, size: 15.0, color: Colors.green),
                   label: const Text(' deseados',textScaleFactor: 0.8,),
                   onPressed: () {
-                    print('Comenta algo');
+                    Alert(
+                    context: context,
+                    type: AlertType.success,
+                    title: "Agregar a Deseados",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      ),
+                      DialogButton(child: Text("Canacelar",style: TextStyle(color: Colors.black, fontSize: 20)),
+                      onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      )
+                    ],
+                  ).show();
                   },
                 ),
                 new FlatButton.icon(

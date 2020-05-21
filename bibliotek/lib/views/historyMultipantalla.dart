@@ -1,6 +1,7 @@
 import 'package:bibliotek/views/dummy/historial.dart';
 import 'package:flutter/material.dart';
 import 'package:bibliotek/views/dummy/carrera.dart';
+import 'package:animate_do/animate_do.dart';
 
 class HistoryClass extends StatelessWidget {
    
@@ -20,7 +21,7 @@ class HistoryClass extends StatelessWidget {
          itemCount: dataDummyLibro.length, itemBuilder: (context, i) => new Column(
            children: <Widget>[
             new Divider(
-              height: 10,
+              height: 9,
               
             ),
             Card(
@@ -30,7 +31,7 @@ class HistoryClass extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.0)),
             child: Column(
             children: <Widget>[
-            Image.asset(dataDummyLibro[i].imagenLibro),
+            FadeInLeft(child:  Image.asset(dataDummyLibro[i].imagenLibro),duration: Duration(seconds:2),),
          ListTile(
           title: Text(dataDummyLibro[i].nombre),
           onTap: ()=> carreraSelectedCallback(dataDummyLibro[i]),

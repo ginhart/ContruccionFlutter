@@ -81,11 +81,11 @@ class _SystemsLibraryState extends State<SystemsLibrary> {
                 child: Card(
                   child: Row(
                     children: <Widget>[
-                      Image.asset(
+                     FadeInDown(child: Image.asset(
                         widget.card?.imagenLibro ??
                             "assets/images/no-image-available-sign-internet-260nw-261719003.jpg",
                         height: 100,
-                      ),
+                      )),
                       Text(
                         widget.card?.tituloLibro ?? "seleccione una carrera",
                         style: TextStyle(fontSize: 15),

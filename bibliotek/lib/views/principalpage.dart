@@ -60,14 +60,14 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     unselectedLabelColor: Colors.white.withOpacity(0.3),
                     tabs: [
                       Tab(
-                        text: 'Psicologia',
+                        text: 'Psicologáa',
                       ),
                       Tab(
                         text: 'Negocios',
                       ),
                       Tab(text: 'Mercadeo'),
                       Tab(
-                        text: 'Matematicas',
+                        text: 'Matemáticas',
                       ),
                       Tab(
                         text: 'Sistemas',

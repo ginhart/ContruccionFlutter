@@ -126,22 +126,22 @@ class _LoginState extends State<Login> {
                         print('Falle al registrar ${error.code}');
                         switch (error.code) {
                           case 'ERROR_EMAIL_ALREADY_IN_USE':
-                            _error = 'El correo ya esta en uso';
+                            _error = 'El correo ya esta en uso.';
                             break;
                           case 'ERROR_WEAK_PASSWORD':
                             _error =
-                                'Por favor ingrese una contraseña no tan debil';
+                                'Por favor ingrese una contraseña más larga.';
                             break;
                           case 'ERROR_INVALID_EMAIL':
-                            _error = 'Ingresaste un correo no valido';
+                            _error = 'Ingresaste un correo no valido.';
                             break;
                           default:
-                            _error = 'Por favor revisa tu correo y contraseña';
+                            _error = 'Por favor revisa tu correo y contraseña.';
                             break;
                         }
-                         Toast.show("${_error}", context,
-                              duration: Toast.LENGTH_SHORT,
-                              gravity: Toast.BOTTOM);
+                         Toast.show("$_error", context,
+                              duration: Toast.LENGTH_LONG,
+                              gravity: Toast.CENTER);
                         
                       }
                       

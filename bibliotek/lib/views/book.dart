@@ -1,4 +1,5 @@
 import 'package:Bibliotek/Models/Book.dart';
+import 'package:Bibliotek/Services/Consulta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../functions/Global.dart' as Global;
@@ -15,6 +16,7 @@ class Book extends StatefulWidget {
 class _BookState extends State<Book> {
   Book book = new Book();
   final Firestore _db = Firestore.instance;
+  final Consulta _consulta = Consulta();
 
   Widget bookDescriptionTemplate(book) {
     return Card(
@@ -90,56 +92,102 @@ class _BookState extends State<Book> {
         Expanded(
             child: ButtonBar(
           children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                _db
-                    .collection('Usuarios')
-                    .document(Global.user.id)
-                    .collection('Favoritos')
-                    .document(widget.libro.id)
-                    .setData({
-                  'Nombre': widget.libro.nombre,
-                  'Autor': widget.libro.autor,
-                  'Editorial': widget.libro.editorial,
-                  'Páginas': widget.libro.paginas,
-                  'Facultad': widget.libro.facultad,
-                  'Disponibilidad': widget.libro.disponibilidad,
-                  'Imagen': widget.libro.imagen
-                }).then((value) => {
-                          Toast.show("Libro agregado a Favoritos.", context,
-                              duration: Toast.LENGTH_SHORT,
-                              gravity: Toast.BOTTOM)
-                        });
-              },
-              child: Row(
-                children: [Text('Agregar a Favoritos'), Icon(Icons.star)],
-              ),
-            ),
-            RaisedButton(
-              onPressed: (){
-                _db
-                    .collection('Usuarios')
-                    .document(Global.user.id)
-                    .collection('Deseados')
-                    .document(widget.libro.id)
-                    .setData({
-                  'Nombre': widget.libro.nombre,
-                  'Autor': widget.libro.autor,
-                  'Editorial': widget.libro.editorial,
-                  'Páginas': widget.libro.paginas,
-                  'Facultad': widget.libro.facultad,
-                  'Disponibilidad': widget.libro.disponibilidad,
-                  'Imagen': widget.libro.imagen
-                }).then((value) => {
-                          Toast.show("Libro agregado a Deseados.", context,
-                              duration: Toast.LENGTH_SHORT,
-                              gravity: Toast.BOTTOM)
-                        });
-              },
-              child: Row(
-                children: [Text('Agregar a Deseados'), Icon(Icons.favorite)],
-              ),
-            )
+            StreamBuilder(
+                stream: _consulta.estaEnFavoritos(widget.libro.id),
+                builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  return RaisedButton(
+                    onPressed: () {
+                      snapshot.data.data != null
+                          ? _db
+                              .collection('Usuarios')
+                              .document(Global.user.id)
+                              .collection('Favoritos')
+                              .document(widget.libro.id)
+                              .delete()
+                              .then((value) => {
+                                    Toast.show("Libro eliminado de Favoritos.",
+                                        context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM)
+                                  })
+                          : _db
+                              .collection('Usuarios')
+                              .document(Global.user.id)
+                              .collection('Favoritos')
+                              .document(widget.libro.id)
+                              .setData({
+                              'Nombre': widget.libro.nombre,
+                              'Autor': widget.libro.autor,
+                              'Editorial': widget.libro.editorial,
+                              'Páginas': widget.libro.paginas,
+                              'Facultad': widget.libro.facultad,
+                              'Disponibilidad': widget.libro.disponibilidad,
+                              'Imagen': widget.libro.imagen
+                            }).then((value) => {
+                                    Toast.show(
+                                        "Libro agregado a Favoritos.", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM)
+                                  });
+                    },
+                    child: Row(
+                      children: [
+                        Text(snapshot.data.data != null
+                            ? "Eliminar de Favoritos"
+                            : 'Agregar a Favoritos'),
+                        Icon(Icons.star)
+                      ],
+                    ),
+                  );
+                }),
+            StreamBuilder(
+                stream: _consulta.estaEnDeseados(widget.libro.id),
+                builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  return RaisedButton(
+                    onPressed: () {
+                      snapshot.data.data != null
+                          ? _db
+                              .collection('Usuarios')
+                              .document(Global.user.id)
+                              .collection('Deseados')
+                              .document(widget.libro.id)
+                              .delete()
+                              .then((value) => {
+                                    Toast.show(
+                                        "Libro eliminado de Deseados.", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM)
+                                  })
+                          : _db
+                              .collection('Usuarios')
+                              .document(Global.user.id)
+                              .collection('Deseados')
+                              .document(widget.libro.id)
+                              .setData({
+                              'Nombre': widget.libro.nombre,
+                              'Autor': widget.libro.autor,
+                              'Editorial': widget.libro.editorial,
+                              'Páginas': widget.libro.paginas,
+                              'Facultad': widget.libro.facultad,
+                              'Disponibilidad': widget.libro.disponibilidad,
+                              'Imagen': widget.libro.imagen
+                            }).then((value) => {
+                                    Toast.show(
+                                        "Libro agregado a Deseados.", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM)
+                                  });
+                    },
+                    child: Row(
+                      children: [
+                        Text(snapshot.data.data != null
+                            ? "Eliminar de Deseados"
+                            : 'Agregar a Deseados'),
+                        Icon(Icons.favorite)
+                      ],
+                    ),
+                  );
+                }),
           ],
         ))
       ],

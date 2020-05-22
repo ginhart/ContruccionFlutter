@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
+import 'package:toast/toast.dart';
 import '../functions/Global.dart' as Global;
 
 class Register extends StatefulWidget {
@@ -89,7 +90,7 @@ class _RegisterState extends State<Register> {
                     height: 60,
                     maxLines: 1,
                     duration: Duration(milliseconds: 300),
-                    inputType: TextInputType.text,
+                    inputType: TextInputType.emailAddress,
                     obscureText: false,
                     prefixIcon: Icon(Icons.lock_outline),
                     placeholder: "Correo",
@@ -179,19 +180,22 @@ class _RegisterState extends State<Register> {
                         print('Falle al registrar ${error.code}');
                         switch (error.code) {
                           case 'ERROR_EMAIL_ALREADY_IN_USE':
-                            _error = 'El correo ya esta en uso';
+                            _error = 'El correo ya esta en uso.';
                             break;
                           case 'ERROR_WEAK_PASSWORD':
                             _error =
-                                'Por favor ingrese una contraseña no tan debil';
+                                'Por favor, ingrese una contraseña más larga.';
                             break;
                           case 'ERROR_INVALID_EMAIL':
-                            _error = 'Ingresaste un correo no valido';
+                            _error = 'Ingresaste un correo no valido.';
                             break;
                           default:
-                            _error = 'Por favor revisa tu correo y contraseña';
+                            _error = 'Por favor, revisa tu correo y contraseña.';
                             break;
                         }
+                        Toast.show("$_error", context,
+                              duration: Toast.LENGTH_LONG,
+                              gravity: Toast.CENTER);
                       }
                     },
                   ),

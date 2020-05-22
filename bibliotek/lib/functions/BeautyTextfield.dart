@@ -19,6 +19,7 @@ class BeautyTextfield extends StatefulWidget {
   final ValueChanged<String> onChanged, onSubmitted;
   final GestureTapCallback onTap;
   final TextEditingController controller;
+  
 
   const BeautyTextfield(
       {@required this.width,

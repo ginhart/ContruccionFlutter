@@ -57,9 +57,10 @@ class _LoginState extends State<Login> {
                     width: double.maxFinite,
                     height: 60,
                     duration: Duration(milliseconds: 300),
-                    inputType: TextInputType.text,
+                    inputType: TextInputType.emailAddress,
                     prefixIcon: Icon(Icons.email),
                     placeholder: "Correo",
+                    
                     backgroundColor: Colors.white54,
                     onTap: () {
                       print('Click');

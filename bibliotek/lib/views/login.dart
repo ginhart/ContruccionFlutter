@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
                   Text(
                     'Bienvenido a la BiblioteK',
                     style: TextStyle(
-                        color: Colors.grey[800],
+                        //color: Colors.grey[800],
                         fontWeight: FontWeight.w800,
                         fontStyle: FontStyle.normal,
                         fontFamily: 'Open Sans',

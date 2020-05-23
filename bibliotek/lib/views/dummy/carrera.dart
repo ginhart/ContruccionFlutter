@@ -34,21 +34,21 @@ List<Carrera> dataDummy = <Carrera>[
 
     new Carrera(
     imagenCarrera: 'assets/images/matematicas.png',
-    tituloCarrera: 'Matematicas',
+    tituloCarrera: 'Matemáticas',
     imagenLibro: 'assets/images/matematicas.jpeg',
     tituloLibro: 'Precalculo'
   ),
 
     new Carrera(
     imagenCarrera: 'assets/images/ing_sistemas.png',
-    tituloCarrera: 'Ing_sistemas',
+    tituloCarrera: 'Ingeniería de Sistemas',
     imagenLibro: 'assets/images/sistemas.jpg',
     tituloLibro: 'Intrduccion a la ing sistemas'
   ),
 
     new Carrera(
     imagenCarrera: 'assets/images/ing_industrial.jpg',
-    tituloCarrera: 'Ing_industrial',
+    tituloCarrera: 'Ingeniería Industrial',
     imagenLibro: 'assets/images/industrial.jpeg',
     tituloLibro: 'Ing- industrial'
   ),

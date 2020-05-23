@@ -165,16 +165,15 @@ class _RegisterState extends State<Register> {
                           'Facultad': usuario.facultad
                         }).then((value) {
                           print("esta entrando");
-                        Global.user = usuario;
-                        Global.user.id = result.user.uid;
-                        //Navigator.of(context).pop();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PrincipalPage()),
-                        );
+                          Global.user = usuario;
+                          Global.user.id = result.user.uid;
+                          //Navigator.of(context).pop();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PrincipalPage()),
+                          );
                         });
-                        
                       } catch (error) {
                         String _error;
                         print('Falle al registrar ${error.code}');
@@ -189,13 +188,16 @@ class _RegisterState extends State<Register> {
                           case 'ERROR_INVALID_EMAIL':
                             _error = 'Ingresaste un correo no valido.';
                             break;
+                          case 'ERROR_USER_NOT_FOUND':
+                            _error = 'El usuario no existe';
+                            break;
                           default:
-                            _error = 'Por favor, revisa tu correo y contraseña.';
+                            _error =
+                                'Por favor, revisa tu correo y contraseña.';
                             break;
                         }
                         Toast.show("$_error", context,
-                              duration: Toast.LENGTH_LONG,
-                              gravity: Toast.CENTER);
+                            duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
                       }
                     },
                   ),

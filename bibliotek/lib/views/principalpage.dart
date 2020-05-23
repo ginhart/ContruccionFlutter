@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bibliotek/views/historiallibrary.dart';
 import './about.dart';
+import 'package:bibliotek/views/login.dart';
 
 void main() => runApp(new MyApp());
 
@@ -56,17 +57,18 @@ class _PrincipalPageState extends State<PrincipalPage> {
                         builder: (context) => new HistorialLibrary()));
               },
             ),
-            new ListTile(
-              title: new Text('About'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => new AboutPage()));
-              },
-            ),new ListTile(
+           new ListTile(
               title: new Text('Configuracion'),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => new SettingsPage()));
+              },
+            ),
+             new ListTile(
+              title: new Text('Cerrar Sesión'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => new Login()));
               },
             ),
           ],

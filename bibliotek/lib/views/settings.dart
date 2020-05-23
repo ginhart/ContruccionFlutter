@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:provider/provider.dart';
 import 'package:Bibliotek/blocs/them.dart';
+import 'package:toast/toast.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -12,8 +13,22 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final oldPass = TextEditingController();
+  final newPass = TextEditingController();
+  final confirmPass = TextEditingController();
+
+  AuthCredential authCredential; 
 
   int _selectedOption = 0;
+
+  @override
+  void dispose() {
+    // Limpia el controlador cuando el Widget se descarte
+    oldPass.dispose();
+    newPass.dispose();
+    confirmPass.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,12 +122,15 @@ class _SettingsPageState extends State<SettingsPage> {
                                 content: Column(
                                   children: <Widget>[
                                     TextField(
+                                      controller: oldPass,
+                                      obscureText: true,
                                       decoration: InputDecoration(
                                         icon: Icon(Icons.lock),
                                         labelText: 'antigua contraseña',
                                       ),
                                     ),
                                     TextField(
+                                      controller: confirmPass,
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         icon: Icon(Icons.lock),
@@ -120,6 +138,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       ),
                                     ),
                                     TextField(
+                                      controller: newPass,
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         icon: Icon(Icons.lock),
@@ -130,9 +149,29 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ),
                                 buttons: [
                                   DialogButton(
-                                    onPressed: () => {
-                                      //Cambio de contraseña aqui
-                                      Navigator.pop(context)
+                                    onPressed: () async {
+                                      if (oldPass.text == confirmPass.text) {
+                                        _auth.currentUser().then((user) async {
+                                          authCredential = EmailAuthProvider.getCredential(
+                                            email: user.email,
+                                            password: oldPass.text,
+                                          );
+                                          try{
+                                            user.reauthenticateWithCredential(authCredential).then((auth)=>{
+                                              user.updatePassword(newPass.text).then((pass)=>{
+                                                debugPrint("Actualizado"),
+                                              }).catchError((onError)=>{
+                                                Toast.show("La contraseña es erronea", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.CENTER)
+                                              })
+                                            });
+                                          } catch (e){
+                                            Toast.show("La contraseña es erronea", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.CENTER);
+                                          }
+                                        });
+                                      } else {
+                                        Toast.show("Las contraseñas no coinciden", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.CENTER);
+                                      }
+                                      Navigator.pop(context);
                                     },
                                     child: Text(
                                       "Cambiar",
@@ -157,10 +196,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                         primaryColor: Colors.indigo,
                                         accentColor: Colors.indigoAccent,
                                         textTheme: TextTheme(
-                                          headline6: TextStyle(
+                                          headline: TextStyle(
                                               fontSize: 36.0,
                                               color: Colors.black),
-                                          bodyText2: TextStyle(
+                                          body2: TextStyle(
                                               fontSize: 14.0,
                                               color: Colors.black),
                                         ),
@@ -174,10 +213,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                         primaryColor: Colors.black,
                                         accentColor: Colors.indigoAccent,
                                         textTheme: TextTheme(
-                                          headline6: TextStyle(
+                                          headline: TextStyle(
                                               fontSize: 36.0,
                                               color: Colors.white),
-                                          bodyText2: TextStyle(
+                                          body2: TextStyle(
                                               fontSize: 14.0,
                                               color: Colors.white),
                                         ),
@@ -193,10 +232,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                                 accentColor: Colors.teal,
                                                 cardColor: Colors.teal[100],
                                                 textTheme: TextTheme(
-                                                  headline6: TextStyle(
+                                                  headline: TextStyle(
                                                       fontSize: 36.0,
                                                       color: Colors.black),
-                                                  bodyText2: TextStyle(
+                                                  body2: TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.black),
                                                 ),

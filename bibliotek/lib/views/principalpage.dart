@@ -4,6 +4,8 @@ import 'package:Bibliotek/blocs/them.dart';
 import 'package:Bibliotek/views/favoritos.dart';
 import 'package:Bibliotek/views/settings.dart';
 import 'package:Bibliotek/views/systemslibrary.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Bibliotek/views/historiallibrary.dart';
@@ -44,9 +46,23 @@ class PrincipalPage extends StatefulWidget {
 // }
 
 class _PrincipalPageState extends State<PrincipalPage> {
+  String urlImage;
   Autentication logeo = new Autentication();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+
+  getUrl() async {
+    final FirebaseUser user = await _auth.currentUser();
+    _storage.ref().child('${user.uid}.jpg').getDownloadURL().then((url) {
+      setState(() {
+        urlImage = url;
+      });
+    });
+  }
+
   @override
   Widget build(buildContext) {
+    getUrl();
     final theme = Provider.of<ThemeChanger>(context);
     return MaterialApp(
       theme: theme.getTheme(),
@@ -87,7 +103,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     accountEmail: new Text(Global.user.correo),
                     currentAccountPicture: new CircleAvatar(
                       backgroundImage:
-                          new NetworkImage('http://i.pravatar.cc/300'),
+                          new NetworkImage('$urlImage'),
                     ),
                   ),
                   new ListTile(

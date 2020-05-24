@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:Bibliotek/Models/Options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:provider/provider.dart';
 import 'package:Bibliotek/blocs/them.dart';
 import 'package:toast/toast.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -13,13 +18,18 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
   final oldPass = TextEditingController();
   final newPass = TextEditingController();
   final confirmPass = TextEditingController();
 
-  AuthCredential authCredential; 
+  AuthCredential authCredential;
+
 
   int _selectedOption = 0;
+  File imageFile;
+  String urlImage;
+
 
   @override
   void dispose() {
@@ -30,10 +40,46 @@ class _SettingsPageState extends State<SettingsPage> {
     super.dispose();
   }
 
+  void _openGallery(BuildContext context) async {
+    File picture = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final StorageReference _storageRef = _storage.ref();
+    this.setState(() {
+      imageFile = picture;
+      _auth.currentUser().then((user)=>{
+        _storageRef.child("${user.uid}.jpg").putFile(imageFile)
+      });
+    });
+    getUrl();
+    Navigator.pop(context);
+  }
+
+  void _openCamera(BuildContext context) async {
+    File picture = await ImagePicker.pickImage(source: ImageSource.camera);
+    final StorageReference _storageRef = _storage.ref();
+    this.setState(() {
+      imageFile = picture;
+      _auth.currentUser().then((user)=>{
+        _storageRef.child("${user.uid}.jpg").putFile(imageFile)
+      });
+    });
+    getUrl();
+    Navigator.pop(context);
+  }
+
+
+  getUrl() async {
+    final FirebaseUser user = await _auth.currentUser();
+    _storage.ref().child('${user.uid}.jpg').getDownloadURL().then((url) {
+      setState(() {
+        urlImage = url;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    getUrl();
     final theme = Provider.of<ThemeChanger>(context);
-
     return Scaffold(
         appBar: new AppBar(
           title: new Text('Configuración'),
@@ -50,7 +96,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       padding: const EdgeInsets.all(5.0),
                       child: CircleAvatar(
                         backgroundImage:
-                            NetworkImage("http://i.pravatar.cc/300"),
+                            NetworkImage("${urlImage}"),
                         minRadius: 1,
                         maxRadius: 30,
                       ),
@@ -58,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "Configuracion",
+                          "Configuración",
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -115,6 +161,33 @@ class _SettingsPageState extends State<SettingsPage> {
                           _selectedOption = index - 1;
                         });
                         switch (index - 1) {
+                          case 0:
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("¿De donde quieres traer la foto?"),
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: <Widget>[
+                                        GestureDetector(
+                                          child: Text("Galeria"),
+                                          onTap: () {
+                                            _openGallery(context);
+                                          },
+                                        ),
+                                      Padding(padding: EdgeInsets.all(8.0)),
+                                      GestureDetector(
+                                        child: Text("Camara"),
+                                        onTap: () {
+                                          _openCamera(context);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ));
+                            });
+                            break;
                           case 1:
                             Alert(
                                 context: context,

@@ -114,10 +114,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
     var platformChannelSpecifics = NotificationDetails(androidPlatformChannelSpecifics,iOSChannelSpecifics);
 
     _auth.currentUser().then((user){
-      _db.collection("Usuarios").document(user.uid).collection("Favoritos").getDocuments().then((docs){
+      _db.collection("Usuarios").document(user.uid).collection("Deseados").getDocuments().then((docs){
         docs.documents.forEach((f){
           if(f.data['Disponibilidad']==0){
-            flutterLocalNotificationsPlugin.show(0, 'Disponibilidad', 'El libro "${f.data['Nombre']}" no esta disponible', platformChannelSpecifics, payload: 'test payload');
+            flutterLocalNotificationsPlugin.show(0, 'Disponibilidad', 'El libro "${f.data['Nombre']}", no esta disponible', platformChannelSpecifics, payload: 'test payload');
           }
         });
       });

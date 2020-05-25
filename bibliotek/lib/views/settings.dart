@@ -48,7 +48,12 @@ class _SettingsPageState extends State<SettingsPage> {
     this.setState(() {
       imageFile = picture;
       _auth.currentUser().then((user)=>{
-        _storageRef.child("${user.uid}.jpg").putFile(imageFile)
+        _storageRef.child("${user.uid}.jpg").putFile(imageFile),
+        _storageRef.child("${user.uid}.jpg").getDownloadURL().then((url){
+          _db.collection("Usuarios").document(user.uid).updateData({
+            'Foto': url
+          });
+        })
       });
     });
     getUrl();
@@ -61,9 +66,15 @@ class _SettingsPageState extends State<SettingsPage> {
     this.setState(() {
       imageFile = picture;
       _auth.currentUser().then((user)=>{
-        _storageRef.child("${user.uid}.jpg").putFile(imageFile)
+        _storageRef.child("${user.uid}.jpg").putFile(imageFile),
+        _storageRef.child("${user.uid}.jpg").getDownloadURL().then((url){
+          _db.collection("Usuarios").document(user.uid).updateData({
+            'Foto': url
+          });
+        })
       });
     });
+    
     getUrl();
     Navigator.pop(context);
   }
@@ -71,12 +82,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
   getUrl() async {
     final FirebaseUser user = await _auth.currentUser();
-    _storage.ref().child('${user.uid}.jpg').getDownloadURL().then((url) {
+    /*_storage.ref().child('${user.uid}.jpg').getDownloadURL().then((url) {
       setState(() {
         urlImage = url;
       });
+    });*/
+    setState(() {
+      _db.collection("Usuarios").document(user.uid).get().then((doc){
+        urlImage = doc.data['Foto'];
+      });
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       padding: const EdgeInsets.all(5.0),
                       child: CircleAvatar(
                         backgroundImage:
-                            NetworkImage("${urlImage}"),
+                            NetworkImage("$urlImage"),
                         minRadius: 1,
                         maxRadius: 30,
                       ),

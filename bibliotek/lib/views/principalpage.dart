@@ -132,9 +132,14 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
   getUrl() async {
     final FirebaseUser user = await _auth.currentUser();
-    _storage.ref().child('${user.uid}.jpg').getDownloadURL().then((url) {
+    /*_storage.ref().child('${user.uid}.jpg').getDownloadURL().then((url) {
       setState(() {
         urlImage = url;
+      });
+    });*/
+    setState(() {
+      _db.collection("Usuarios").document(user.uid).get().then((doc){
+        urlImage = doc.data['Foto'];
       });
     });
   }

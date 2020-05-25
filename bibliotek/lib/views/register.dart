@@ -163,6 +163,7 @@ class _RegisterState extends State<Register> {
                           'Nombre': usuario.nombre,
                           'Apellido': usuario.apellido,
                           'Facultad': usuario.facultad,
+                          'Foto': "https://firebasestorage.googleapis.com/v0/b/bibliotek-dcb77.appspot.com/o/perfil.png?alt=media&token=934f201a-40d3-4bd8-b2dd-1593a391d046",
                           'Notificaciones': true
                         }).then((value) {
                           print("esta entrando");

@@ -3,6 +3,7 @@ import 'package:Bibliotek/Services/Push_notificattion_Service.dart';
 import 'package:Bibliotek/views/deseados.dart';
 import 'package:Bibliotek/blocs/them.dart';
 import 'package:Bibliotek/views/favoritos.dart';
+import 'package:Bibliotek/views/search.dart';
 import 'package:Bibliotek/views/settings.dart';
 import 'package:Bibliotek/views/systemslibrary.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -158,6 +159,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
           length: 6,
           child: Scaffold(
             appBar: AppBar(
+                actions: [
+                IconButton(icon: Icon (Icons.search), onPressed: (){
+                  print('Search');
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => Search()));
+                })
+              ],
               bottom: PreferredSize(
                 child: TabBar(
                     isScrollable: true,

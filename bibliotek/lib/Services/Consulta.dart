@@ -12,6 +12,10 @@ Stream<QuerySnapshot> buscarLibrosFiltrados(String facultad){
 
 }
 
+Stream<QuerySnapshot> traerLibrosBuscados(){
+  return _db.collection('Libros').snapshots();
+}
+
 Stream<DocumentSnapshot> estaEnFavoritos(String libro){
   return _db.collection('Usuarios').document(Global.user.id).collection('Favoritos').document(libro).snapshots();
 }

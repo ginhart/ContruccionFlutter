@@ -2,6 +2,7 @@ import 'package:Bibliotek/Services/AutService.dart';
 import 'package:Bibliotek/views/deseados.dart';
 import 'package:Bibliotek/blocs/them.dart';
 import 'package:Bibliotek/views/favoritos.dart';
+import 'package:Bibliotek/views/search.dart';
 import 'package:Bibliotek/views/settings.dart';
 import 'package:Bibliotek/views/systemslibrary.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +10,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Bibliotek/views/historiallibrary.dart';
-import './about.dart';
 import 'deseados.dart';
 import 'login.dart';
 import 'psychologylibrary.dart';
@@ -48,6 +48,7 @@ class PrincipalPage extends StatefulWidget {
 class _PrincipalPageState extends State<PrincipalPage> {
   String urlImage;
   Autentication logeo = new Autentication();
+  /*
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
@@ -59,10 +60,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
       });
     });
   }
-
+/ */
   @override
   Widget build(buildContext) {
-    getUrl();
+    /*getUrl();/ */
     final theme = Provider.of<ThemeChanger>(context);
     return MaterialApp(
       theme: theme.getTheme(),
@@ -70,6 +71,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
           length: 6,
           child: Scaffold(
             appBar: AppBar(
+              actions: [
+                IconButton(icon: Icon (Icons.search), onPressed: (){
+                  print('Search');
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => Search()));
+                })
+              ],
               bottom: PreferredSize(
                 child: TabBar(
                     isScrollable: true,

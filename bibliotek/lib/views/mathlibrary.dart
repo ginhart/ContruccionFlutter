@@ -20,40 +20,7 @@ class _MathLibraryState extends State<MathLibrary> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          // action button
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(() {
-                _inputsearch = BeautyTextfield(
-                  width: double.maxFinite,
-                  height: 60,
-                  maxLines: 1,
-                  duration: Duration(milliseconds: 300),
-                  inputType: TextInputType.text,
-                  placeholder: "...",
-                  prefixIcon: Icon(Icons.search),
-                  backgroundColor: Colors.white54,
-                  onTap: () {
-                    print('Click');
-                  },
-                  onChanged: (text) {
-                    print(text);
-                  },
-                  onSubmitted: (data) {
-                    print(data.length);
-                  },
-                );
-              });
-            },
-          ),
-          // action button
-
-          // overflow menu
-        ],
-      ),
+      
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(

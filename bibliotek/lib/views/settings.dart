@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Bibliotek/Models/Options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +20,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
+  final Firestore _db = Firestore.instance;
   final oldPass = TextEditingController();
   final newPass = TextEditingController();
   final confirmPass = TextEditingController();
@@ -255,6 +257,49 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ]).show();
                             break;
                           case 2:
+                            Alert(
+                                context: context,
+                                title: "Activar o desactivas notificaciones",
+                                content: Column(
+                                  children: <Widget>[
+                                    FlatButton(
+                                      child: Text('Activar'),
+                                      onPressed: () => {
+                                        _auth.currentUser().then((user){
+                                          var ref = _db.collection("Usuarios").document(user.uid);
+                                          ref.updateData({
+                                            'Notificaciones': true
+                                          });
+                                          Navigator.pop(context);
+                                        })
+                                      }
+                                    ),
+                                    FlatButton(
+                                      child: Text('Desactivar'),
+                                      onPressed: () => {
+                                        _auth.currentUser().then((user){
+                                          var ref = _db.collection("Usuarios").document(user.uid);
+                                          ref.updateData({
+                                            'Notificaciones': false
+                                          });
+                                          Navigator.pop(context);
+                                        })
+                                      }
+                                    ),
+                                  ],
+                                ),
+                                buttons: [
+                                  DialogButton(
+                                    onPressed: () => {
+                                      Navigator.pop(context)
+                                    },
+                                    child: Text(
+                                      "Cancelar",
+                                      style: TextStyle(
+                                          ),
+                                    ),
+                                  )
+                                ]).show();
                             break;
                           case 3:
                             Alert(

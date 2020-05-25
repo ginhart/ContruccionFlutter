@@ -1,15 +1,17 @@
 import 'package:Bibliotek/Services/AutService.dart';
+import 'package:Bibliotek/Services/Push_notificattion_Service.dart';
 import 'package:Bibliotek/views/deseados.dart';
 import 'package:Bibliotek/blocs/them.dart';
 import 'package:Bibliotek/views/favoritos.dart';
 import 'package:Bibliotek/views/settings.dart';
 import 'package:Bibliotek/views/systemslibrary.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Bibliotek/views/historiallibrary.dart';
-import './about.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'deseados.dart';
 import 'login.dart';
 import 'psychologylibrary.dart';
@@ -46,6 +48,83 @@ class PrincipalPage extends StatefulWidget {
 // }
 
 class _PrincipalPageState extends State<PrincipalPage> {
+
+  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+  final Firestore _db = Firestore.instance;
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+  var initializationSettingsAndroid;
+  var initializationSettingsIOS;
+  var initializationSettings;
+  bool noti;
+
+  @override
+  void initState(){
+    super.initState();
+    
+    _auth.currentUser().then((user){
+      _db.collection("Usuarios").document(user.uid).get().then((doc){
+        noti = doc.data['Notificaciones'];
+        if(noti){
+          _showNotification();//llama la notificicaion
+          initializationSettingsAndroid = new AndroidInitializationSettings('konradlogogris');
+          initializationSettingsIOS = new IOSInitializationSettings(
+            onDidReceiveLocalNotification: onDidReceiveLocalNotification
+          );
+          initializationSettings = new InitializationSettings(initializationSettingsAndroid, initializationSettingsIOS);
+          flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: onSelectNotification);
+          final pushProvider = new PushNotificationProvider();
+          pushProvider.initNotifications();
+
+          pushProvider.mensajes.listen((argumento){
+            navigatorKey.currentState.pushNamed(argumento);
+          });
+          }
+          });
+        });
+  }
+
+  Future onSelectNotification(String payload) async{
+    if(payload != null){
+      debugPrint('Notification payload: $payload');
+    }
+  }
+
+  Future onDidReceiveLocalNotification(int id, String title, String body, String p) async{
+    await showDialog(context: context,
+    builder: (BuildContext context)=>CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(body),
+      actions: <Widget>[
+        CupertinoDialogAction(child: Text("OK"),
+        onPressed: () async {
+          debugPrint('pressed');
+        },)
+      ],
+    ));
+  }
+
+  void _showNotification() async{
+    await _demoNotification();
+  }
+
+  Future<void> _demoNotification() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails("channelId", "channelName", "channelDescription", importance: Importance.Max, priority: Priority.High, ticker: "test Ticker");
+    var iOSChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(androidPlatformChannelSpecifics,iOSChannelSpecifics);
+
+    _auth.currentUser().then((user){
+      _db.collection("Usuarios").document(user.uid).collection("Favoritos").getDocuments().then((docs){
+        docs.documents.forEach((f){
+          if(f.data['Disponibilidad']==0){
+            flutterLocalNotificationsPlugin.show(0, 'Disponibilidad', 'El libro "${f.data['Nombre']}" no esta disponible', platformChannelSpecifics, payload: 'test payload');
+          }
+        });
+      });
+    });
+    //Notificacion
+    //await flutterLocalNotificationsPlugin.show(0, 'Hola mundo', 'body', platformChannelSpecifics, payload: 'test payload');
+  }
+
   String urlImage;
   Autentication logeo = new Autentication();
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -65,6 +144,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
     getUrl();
     final theme = Provider.of<ThemeChanger>(context);
     return MaterialApp(
+      navigatorKey: navigatorKey,
+      routes: {
+        'Deseados' : (BuildContext context) => Deseados(),
+      },
       theme: theme.getTheme(),
       home: DefaultTabController(
           length: 6,

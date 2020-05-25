@@ -162,7 +162,8 @@ class _RegisterState extends State<Register> {
                           'Correo': usuario.correo,
                           'Nombre': usuario.nombre,
                           'Apellido': usuario.apellido,
-                          'Facultad': usuario.facultad
+                          'Facultad': usuario.facultad,
+                          'Notificaciones': true
                         }).then((value) {
                           print("esta entrando");
                           Global.user = usuario;

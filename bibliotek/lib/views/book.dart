@@ -196,6 +196,20 @@ class _BookState extends State<Book> {
 
   @override
   Widget build(BuildContext context) {
+    _db
+        .collection('Usuarios')
+        .document(Global.user.id)
+        .collection('Historial')
+        .document(widget.libro.id)
+        .setData({
+      'Nombre': widget.libro.nombre,
+      'Autor': widget.libro.autor,
+      'Editorial': widget.libro.editorial,
+      'Páginas': widget.libro.paginas,
+      'Facultad': widget.libro.facultad,
+      'Disponibilidad': widget.libro.disponibilidad,
+      'Imagen': widget.libro.imagen
+    });
     return Container(
       child: Scaffold(
           appBar: AppBar(

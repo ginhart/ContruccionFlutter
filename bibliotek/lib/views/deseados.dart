@@ -20,40 +20,7 @@ class _DeseadosState extends State<Deseados> {
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          // action button
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(() {
-                _inputsearch = BeautyTextfield(
-                  width: double.maxFinite,
-                  height: 60,
-                  maxLines: 1,
-                  duration: Duration(milliseconds: 300),
-                  inputType: TextInputType.text,
-                  placeholder: "...",
-                  prefixIcon: Icon(Icons.search),
-                  backgroundColor: Colors.white54,
-                  onTap: () {
-                    print('Click');
-                  },
-                  onChanged: (text) {
-                    print(text);
-                  },
-                  onSubmitted: (data) {
-                    print(data.length);
-                  },
-                );
-              });
-            },
-          ),
-          // action button
-
-          // overflow menu
-        ],
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -106,24 +73,27 @@ class _DeseadosState extends State<Deseados> {
 
       print(libro);
       return GestureDetector(
-        child: SingleChildScrollView(scrollDirection: Axis.horizontal,
-            child: Card( 
-          child: Row(
-            children: <Widget>[
-              Image.network(
-                snapshot.data['Imagen'],
-                height: 150,
-              ), Column(children: [
-                Text(
-                snapshot.data['Nombre'],
-                style: TextStyle(fontSize: 18),
+        child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Card(
+              child: Row(
+                children: <Widget>[
+                  Image.network(
+                    snapshot.data['Imagen'],
+                    height: 150,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        snapshot.data['Nombre'],
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text('Disponibilidad: ' + libro.disponibilidad.toString())
+                    ],
+                  )
+                ],
               ),
-              Text('Disponibilidad: ' + libro.disponibilidad.toString())
-              ],)
-              
-            ],
-          ),
-        )),
+            )),
         onTap: () {
           Navigator.push(
             context,

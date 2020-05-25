@@ -13,48 +13,12 @@ class IndustrialLibrary extends StatefulWidget {
 }
 
 class _IndustrialLibraryState extends State<IndustrialLibrary> {
-
   Widget _inputsearch = new Container();
   Consulta _consulta = new Consulta();
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-      appBar: AppBar(
-        //title: Text('Libros de Industrial.'),
-        actions: <Widget>[
-          // action button
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(() {
-                _inputsearch = BeautyTextfield(
-                  width: double.maxFinite,
-                  height: 60,
-                  maxLines: 1,
-                  duration: Duration(milliseconds: 300),
-                  inputType: TextInputType.text,
-                  placeholder: "...",
-                  prefixIcon: Icon(Icons.search),
-                  backgroundColor: Colors.white54,
-                  onTap: () {
-                    print('Click');
-                  },
-                  onChanged: (text) {
-                    print(text);
-                  },
-                  onSubmitted: (data) {
-                    print(data.length);
-                  },
-                );
-              });
-            },
-          ),
-          // action button
-
-          // overflow menu
-        ],
-      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -101,30 +65,34 @@ class _IndustrialLibraryState extends State<IndustrialLibrary> {
 
       print(libro);
       return GestureDetector(
-        child: Container(//SingleChildScrollView(scrollDirection: Axis.horizontal,
-            child: Card( 
+        child: Container(
+            //SingleChildScrollView(scrollDirection: Axis.horizontal,
+            child: Card(
           child: Row(
             children: <Widget>[
               Image.network(
                 snapshot.data['Imagen'],
                 height: 150,
-              ), Expanded(child:
-                Container(
+              ),
+              Expanded(
+                child: Container(
                   margin: EdgeInsets.all(5),
-                child:Text(
-                snapshot.data['Nombre'],
-                style: TextStyle(fontSize: 18),
-              ),)
-              
-              ,)
-              
+                  child: Text(
+                    snapshot.data['Nombre'],
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              )
             ],
           ),
         )),
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Book(libro: libro,)),
+            MaterialPageRoute(
+                builder: (context) => Book(
+                      libro: libro,
+                    )),
           );
         },
       );

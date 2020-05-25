@@ -1,58 +1,52 @@
 import 'package:Bibliotek/Models/Book.dart';
 import 'package:Bibliotek/Services/Consulta.dart';
-import 'package:Bibliotek/functions/BeautyTextfield.dart';
-import 'package:Bibliotek/views/book.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class SystemsLibrary extends StatefulWidget {
-  SystemsLibrary({Key key}) : super(key: key);
+import 'book.dart';
+
+class Search extends StatefulWidget {
+  Search({Key key}) : super(key: key);
 
   @override
-  _SystemsLibraryState createState() => _SystemsLibraryState();
+  SearchState createState() => SearchState();
 }
 
-class _SystemsLibraryState extends State<SystemsLibrary> {
-
-  Widget _inputsearch = new Container();
+class SearchState extends State<Search> {
   Consulta _consulta = new Consulta();
+  String filtro = '';
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Scaffold(
-     
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Center(
-              child: Column(
-            children: <Widget>[
-              _inputsearch,
-              Text(
-                'Libros de Sistemas.',
-                style: TextStyle(
-                    color: Colors.grey[800],
-                    fontWeight: FontWeight.w800,
-                    fontStyle: FontStyle.normal,
-                    fontFamily: 'Open Sans',
-                    fontSize: 25),
-              ),
-              StreamBuilder(
-                  stream: this._consulta.buscarLibrosFiltrados('Sistemas'),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    return snapshot.hasData
-                        ? Column(
-                            children: buildBooks(snapshot.data.documents),
-                          )
-                        : CircularProgressIndicator();
-                  })
-            ],
-          )),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: TextField(
+            decoration: InputDecoration(labelText: 'Busca un Libro'),
+            onChanged: (text){
+               setState(() {
+                 filtro = text;
+               });
+            },),
       ),
-    ));
-  }
+      body: StreamBuilder(
+          stream: this._consulta.traerLibrosBuscados(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            
+            List<DocumentSnapshot> librosFilt = new List<DocumentSnapshot>();
 
+            
+              librosFilt = snapshot.data.documents.where((element) => element.data['Nombre'].toString().toLowerCase().contains(this.filtro.toLowerCase())).toList();
+            
+            return snapshot.hasData
+          
+                        ? SingleChildScrollView(child:  Column(
+                          
+                            children: buildBooks(librosFilt),
+                          ),) 
+                        : CircularProgressIndicator();
+          }),
+    );
+  }
   List<Widget> buildBooks(List<DocumentSnapshot> documentos) {
     List<Widget> books = documentos.map((DocumentSnapshot snapshot) {
       BookModel libro = new BookModel(

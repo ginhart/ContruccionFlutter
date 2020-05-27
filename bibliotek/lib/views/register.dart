@@ -178,7 +178,7 @@ class _RegisterState extends State<Register> {
                         });
                       } catch (error) {
                         String _error;
-                        print('Falle al registrar ${error.code}');
+                        print('Falle al registrar ${error.code || error._AssertionError}');
                         switch (error.code) {
                           case 'ERROR_EMAIL_ALREADY_IN_USE':
                             _error = 'El correo ya esta en uso.';

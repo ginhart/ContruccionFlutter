@@ -218,7 +218,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         icon: Icon(Icons.lock),
-                                        labelText: 'antigua contraseña',
+                                        labelText: 'Antigua contraseña',
                                       ),
                                     ),
                                     TextField(
@@ -226,7 +226,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         icon: Icon(Icons.lock),
-                                        labelText: 'confirmar contraseña',
+                                        labelText: 'Confirmar contraseña',
                                       ),
                                     ),
                                     TextField(
@@ -275,6 +275,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             break;
                           case 2:
                             Alert(
+                               
                                 context: context,
                                 title: "Activar o desactivas notificaciones",
                                 content: Column(
@@ -319,22 +320,28 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ]).show();
                             break;
                           case 3:
-                            Alert(
+                          
+                            Alert( 
+                              style: AlertStyle(
+                                backgroundColor: Colors.grey,
+                              ),
                                 context: context,
                                 title: "Cambiar tema",
                                 content: Column(
                                   children: <Widget>[
                                     FlatButton(
+                                      
                                       child: Text('Claro'),
                                       onPressed: () => theme.setTheme(ThemeData(
+                                        brightness: Brightness.light,
                                         primarySwatch: Colors.blue,
                                         primaryColor: Colors.indigo,
                                         accentColor: Colors.indigoAccent,
                                         textTheme: TextTheme(
-                                          headline: TextStyle(
+                                          headline5: TextStyle(
                                               fontSize: 36.0,
                                               color: Colors.black),
-                                          body2: TextStyle(
+                                          bodyText2: TextStyle(
                                               fontSize: 14.0,
                                               color: Colors.black),
                                         ),
@@ -348,10 +355,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                         primaryColor: Colors.black,
                                         accentColor: Colors.indigoAccent,
                                         textTheme: TextTheme(
-                                          headline: TextStyle(
+                                          headline5: TextStyle(
                                               fontSize: 36.0,
                                               color: Colors.white),
-                                          body2: TextStyle(
+                                          bodyText2: TextStyle(
                                               fontSize: 14.0,
                                               color: Colors.white),
                                         ),
@@ -367,10 +374,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                                 accentColor: Colors.teal,
                                                 cardColor: Colors.teal[100],
                                                 textTheme: TextTheme(
-                                                  headline: TextStyle(
+                                                  headline5: TextStyle(
                                                       fontSize: 36.0,
                                                       color: Colors.black),
-                                                  body2: TextStyle(
+                                                  bodyText2: TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.black),
                                                 ),
@@ -385,7 +392,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       Navigator.pop(context)
                                     },
                                     child: Text(
-                                      "Cambiar",
+                                      "Aceptar",
                                       style: TextStyle(
                                           ),
                                     ),

@@ -73,6 +73,7 @@ class _IndustrialLibraryState extends State<IndustrialLibrary> {
               Image.network(
                 snapshot.data['Imagen'],
                 height: 150,
+                width: 100,
               ),
               Expanded(
                 child: Container(

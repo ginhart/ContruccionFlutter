@@ -67,28 +67,35 @@ class _SystemsLibraryState extends State<SystemsLibrary> {
 
       print(libro);
       return GestureDetector(
-       child: SingleChildScrollView(scrollDirection: Axis.horizontal,
-            child: Card( 
+        child: Container(
+            //SingleChildScrollView(scrollDirection: Axis.horizontal,
+            child: Card(
           child: Row(
             children: <Widget>[
               Image.network(
                 snapshot.data['Imagen'],
                 height: 150,
-              ), Column(children: [
-                Text(
-                snapshot.data['Nombre'],
-                style: TextStyle(fontSize: 18),
+                width: 100,
               ),
-              
-              ],)
-              
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  child: Text(
+                    snapshot.data['Nombre'],
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              )
             ],
           ),
         )),
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Book(libro: libro,)),
+            MaterialPageRoute(
+                builder: (context) => Book(
+                      libro: libro,
+                    )),
           );
         },
       );

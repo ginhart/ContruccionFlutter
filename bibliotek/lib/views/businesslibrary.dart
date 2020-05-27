@@ -65,20 +65,28 @@ class _BusinessLibraryState extends State<BusinessLibrary> {
 
       print(libro);
       return GestureDetector(
-        child: Card(
+        child: Container(
+            //SingleChildScrollView(scrollDirection: Axis.horizontal,
+            child: Card(
           child: Row(
             children: <Widget>[
               Image.network(
                 snapshot.data['Imagen'],
                 height: 150,
+                width: 100,
               ),
-              Text(
-                snapshot.data['Nombre'],
-                style: TextStyle(fontSize: 18),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  child: Text(
+                    snapshot.data['Nombre'],
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
               )
             ],
           ),
-        ),
+        )),
         onTap: () {
           Navigator.push(
             context,

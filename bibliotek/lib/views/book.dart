@@ -30,6 +30,10 @@ class _BookState extends State<Book> {
                   margin: EdgeInsets.only(left: 10),
                   child: Image.network(
                     widget.libro.imagen,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      return Center(child: child);
+                    },
                     //height: 300,
                   ),
                 ),
@@ -95,7 +99,8 @@ class _BookState extends State<Book> {
             StreamBuilder(
                 stream: _consulta.estaEnFavoritos(widget.libro.id),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                  return RaisedButton(
+                  return snapshot.hasData ?
+                  RaisedButton(
                     onPressed: () {
                       snapshot.data.data != null
                           ? _db
@@ -138,12 +143,13 @@ class _BookState extends State<Book> {
                         Icon(Icons.star)
                       ],
                     ),
-                  );
+                  ) : CircularProgressIndicator();
                 }),
             StreamBuilder(
                 stream: _consulta.estaEnDeseados(widget.libro.id),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                  return RaisedButton(
+                  return snapshot.hasData ?
+                  RaisedButton(
                     onPressed: () {
                       snapshot.data.data != null
                           ? _db
@@ -186,7 +192,7 @@ class _BookState extends State<Book> {
                         Icon(Icons.favorite)
                       ],
                     ),
-                  );
+                  ) : CircularProgressIndicator();
                 }),
           ],
         ))
